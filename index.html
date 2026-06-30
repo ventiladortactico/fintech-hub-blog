@@ -9,10 +9,10 @@
     <meta property="og:title" content="FinTech Hub - Tu Guía de Finanzas y Tecnología">
     <meta property="og:description" content="Blog sobre finanzas personales y tecnología">
     <meta property="og:type" content="website">
-    
+
     <!-- BidVertiser - Código general (reemplazar PUBLISHER_ID tras registrarse) -->
     <script data-cfasync="false" type="text/javascript" src="//srv.bidvertiser.com/bidvertiser/bdv_ref.dbm?Ref_Option=PUBLISHER_ID"></script>
-    
+
     <style>
         * {
             margin: 0;
@@ -27,11 +27,44 @@
             background-color: #f5f7fa;
         }
 
-        /* Header */
+        /* Loader */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f5f7fa;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #e0e0e0;
+            border-top-color: #667eea;
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Smaller Header */
         header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 2rem 0;
+            padding: 0.6rem 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
             position: sticky;
             top: 0;
@@ -44,73 +77,120 @@
             padding: 0 20px;
         }
 
-        header h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
         }
 
-        header p {
-            font-size: 1.1rem;
-            opacity: 0.9;
+        .header-inner h1 {
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: opacity 0.3s;
+        }
+
+        .header-inner h1:hover {
+            opacity: 0.85;
+        }
+
+        .header-inner p {
+            font-size: 0.85rem;
+            opacity: 0.85;
+            display: none;
         }
 
         nav {
             display: flex;
-            gap: 2rem;
-            margin-top: 1rem;
+            gap: 0.4rem;
+            flex-wrap: wrap;
         }
 
         nav a {
             color: white;
             text-decoration: none;
             font-weight: 500;
-            transition: opacity 0.3s;
+            font-size: 0.85rem;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            transition: background 0.3s, opacity 0.3s;
         }
 
         nav a:hover {
-            opacity: 0.8;
+            background: rgba(255,255,255,0.15);
+        }
+
+        nav a.active {
+            background: rgba(255,255,255,0.25);
         }
 
         /* Main Content */
         main {
-            margin: 3rem 0;
+            margin: 1.5rem 0;
+        }
+
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         /* Ads Placeholder */
         .ad-container {
             background: white;
             padding: 1rem;
-            margin: 2rem 0;
+            margin: 1.5rem 0;
             border-radius: 8px;
             text-align: center;
-            min-height: 250px;
+            min-height: 120px;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .ad-container:hover {
+            transform: scale(1.01);
         }
 
         /* Featured Section */
         .featured {
             background: white;
-            padding: 2rem;
+            padding: 1.8rem;
             border-radius: 8px;
-            margin-bottom: 3rem;
+            margin-bottom: 2rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            border-left: 4px solid #667eea;
+            transition: box-shadow 0.3s;
+        }
+
+        .featured:hover {
+            box-shadow: 0 4px 20px rgba(102,126,234,0.15);
         }
 
         .featured h2 {
             color: #667eea;
-            margin-bottom: 1rem;
-            font-size: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .featured p {
+            margin-bottom: 0.8rem;
         }
 
         /* Posts Grid */
         .posts-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-bottom: 3rem;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
         }
 
         .post-card {
@@ -118,138 +198,82 @@
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s;
+            cursor: pointer;
+            position: relative;
         }
 
         .post-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.15);
+        }
+
+        .post-card::after {
+            content: '→ Leer';
+            position: absolute;
+            bottom: 1rem;
+            right: 1rem;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            opacity: 0;
+            transform: translateX(10px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .post-card:hover::after {
+            opacity: 1;
+            transform: translateX(0);
         }
 
         .post-image {
             width: 100%;
-            height: 200px;
+            height: 160px;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 3rem;
+            font-size: 2.5rem;
+            transition: transform 0.5s;
+        }
+
+        .post-card:hover .post-image {
+            transform: scale(1.05);
         }
 
         .post-content {
-            padding: 1.5rem;
+            padding: 1.2rem;
         }
 
         .post-category {
             display: inline-block;
             background: #667eea;
             color: white;
-            padding: 0.25rem 0.75rem;
+            padding: 0.2rem 0.6rem;
             border-radius: 20px;
-            font-size: 0.85rem;
-            margin-bottom: 0.5rem;
+            font-size: 0.75rem;
+            margin-bottom: 0.4rem;
         }
 
         .post-card h3 {
             color: #333;
-            margin-bottom: 0.5rem;
-            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+            font-size: 1.1rem;
         }
 
         .post-card p {
             color: #666;
-            margin-bottom: 1rem;
-            font-size: 0.95rem;
+            margin-bottom: 0.8rem;
+            font-size: 0.88rem;
         }
 
         .post-meta {
             display: flex;
             justify-content: space-between;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             color: #999;
-        }
-
-        .read-more {
-            display: inline-block;
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            margin-top: 0.5rem;
-            transition: color 0.3s;
-        }
-
-        .read-more:hover {
-            color: #764ba2;
-        }
-
-        /* Sidebar */
-        .sidebar {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-
-        .sidebar h3 {
-            color: #667eea;
-            margin-bottom: 1rem;
-            border-bottom: 2px solid #667eea;
-            padding-bottom: 0.5rem;
-        }
-
-        .sidebar-item {
-            padding: 0.75rem 0;
-            border-bottom: 1px solid #eee;
-        }
-
-        .sidebar-item:last-child {
-            border-bottom: none;
-        }
-
-        .sidebar-item a {
-            color: #667eea;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .sidebar-item a:hover {
-            color: #764ba2;
-        }
-
-        /* Two Column Layout */
-        .content-wrapper {
-            display: grid;
-            grid-template-columns: 1fr 300px;
-            gap: 2rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #333;
-            color: white;
-            padding: 3rem 0;
-            text-align: center;
-            margin-top: 3rem;
-        }
-
-        footer p {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links {
-            margin-bottom: 1rem;
-        }
-
-        .footer-links a {
-            color: white;
-            text-decoration: none;
-            margin: 0 1rem;
-            transition: color 0.3s;
-        }
-
-        .footer-links a:hover {
-            color: #667eea;
         }
 
         /* Full Article */
@@ -260,16 +284,22 @@
             border-radius: 8px;
             margin-bottom: 2rem;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            animation: fadeIn 0.3s ease;
+            animation: fadeSlideIn 0.4s ease;
+            border-top: 4px solid #667eea;
         }
 
         .full-article.active {
             display: block;
         }
 
+        @keyframes fadeSlideIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .full-article h2 {
             color: #667eea;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
         }
 
         .full-article p {
@@ -281,42 +311,63 @@
             float: right;
             background: none;
             border: none;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             cursor: pointer;
             color: #999;
-            transition: color 0.3s;
+            transition: color 0.3s, transform 0.3s;
         }
 
         .full-article .close-btn:hover {
             color: #333;
+            transform: rotate(90deg);
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* Tags */
+        .tags {
+            display: flex;
+            gap: 0.4rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: #f0f0f0;
+            color: #666;
+            padding: 0.2rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            transition: background 0.3s;
+        }
+
+        .tag:hover {
+            background: #667eea;
+            color: white;
         }
 
         /* Social Sharing */
         .share-buttons {
             display: flex;
-            gap: 0.5rem;
+            gap: 0.4rem;
             margin-top: 1rem;
+            flex-wrap: wrap;
+            align-items: center;
         }
 
         .share-btn {
             display: inline-flex;
             align-items: center;
             gap: 0.25rem;
-            padding: 0.5rem 1rem;
+            padding: 0.4rem 0.8rem;
             border-radius: 5px;
             color: white;
             text-decoration: none;
-            font-size: 0.85rem;
-            transition: opacity 0.3s;
+            font-size: 0.8rem;
+            transition: opacity 0.3s, transform 0.3s;
         }
 
         .share-btn:hover {
-            opacity: 0.8;
+            opacity: 0.85;
+            transform: translateY(-2px);
         }
 
         .share-btn.facebook { background: #1877f2; }
@@ -324,490 +375,406 @@
         .share-btn.whatsapp { background: #25d366; }
         .share-btn.linkedin { background: #0a66c2; }
 
-        /* Tags */
-        .tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
+        /* Sidebar */
+        .sidebar {
+            background: white;
+            padding: 1.2rem;
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s;
         }
 
-        .tag {
-            background: #f0f0f0;
-            color: #666;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.8rem;
+        .sidebar:hover {
+            box-shadow: 0 4px 16px rgba(0,0,0,0.12);
         }
 
-        /* Scroll to Top */
-        .scroll-top {
-            position: fixed;
-            bottom: 2rem;
-            right: 2rem;
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            display: none;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
-            transition: transform 0.3s;
-            z-index: 1000;
-        }
-
-        .scroll-top:hover {
-            transform: scale(1.1);
-        }
-
-        .scroll-top.visible {
-            display: flex;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            header h1 {
-                font-size: 1.8rem;
-            }
-
-            nav {
-                gap: 1rem;
-            }
-
-            .content-wrapper {
-                grid-template-columns: 1fr;
-            }
-
-            .posts-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Button Style */
-        .btn {
-            display: inline-block;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 5px;
-            text-decoration: none;
-            transition: transform 0.3s;
-            border: none;
-            cursor: pointer;
+        .sidebar h3 {
+            color: #667eea;
+            margin-bottom: 0.8rem;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 0.4rem;
             font-size: 1rem;
         }
 
-        .btn:hover {
-            transform: scale(1.05);
+        .sidebar-item {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid #eee;
+            transition: padding-left 0.3s;
         }
 
+        .sidebar-item:hover {
+            padding-left: 8px;
+        }
+
+        .sidebar-item:last-child {
+            border-bottom: none;
+        }
+
+        .sidebar-item a {
+            color: #667eea;
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.88rem;
+        }
+
+        .sidebar-item a:hover {
+            color: #764ba2;
+        }
+
+        /* Two Column Layout */
+        .content-wrapper {
+            display: grid;
+            grid-template-columns: 1fr 280px;
+            gap: 1.5rem;
+        }
+
+        /* Newsletter */
         .newsletter {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 2rem;
+            padding: 1.5rem;
             border-radius: 8px;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .newsletter:hover {
+            transform: scale(1.02);
         }
 
         .newsletter h3 {
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+
+        .newsletter p {
+            font-size: 0.85rem;
+            margin-bottom: 0.8rem;
         }
 
         .newsletter input {
             width: 100%;
-            padding: 0.75rem;
-            margin-bottom: 0.5rem;
+            padding: 0.6rem;
+            margin-bottom: 0.4rem;
             border: none;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 0.9rem;
         }
 
         .newsletter button {
             width: 100%;
-            padding: 0.75rem;
+            padding: 0.6rem;
             background: white;
             color: #667eea;
             font-weight: bold;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            transition: transform 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-size: 0.9rem;
         }
 
         .newsletter button:hover {
             transform: scale(1.02);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+        }
+
+        /* Contact Form */
+        .contact-form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-bottom: 2rem;
+        }
+
+        .contact-form h2 {
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 0.7rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            font-family: inherit;
+            transition: border-color 0.3s;
+        }
+
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .contact-form textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        .contact-form .btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 0.6rem 1.5rem;
+            border-radius: 5px;
+            text-decoration: none;
+            transition: transform 0.3s, box-shadow 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+        }
+
+        .contact-form .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102,126,234,0.4);
+        }
+
+        /* Footer */
+        footer {
+            background: #333;
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            margin-top: 2rem;
+        }
+
+        footer h3 {
+            margin-bottom: 0.5rem;
+        }
+
+        footer p {
+            margin-bottom: 0.5rem;
+            font-size: 0.88rem;
+        }
+
+        .footer-links {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 0.8rem;
+            transition: color 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a:hover {
+            color: #667eea;
+        }
+
+        /* Scroll to Top */
+        .scroll-top {
+            position: fixed;
+            bottom: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.1rem;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            transition: transform 0.3s, opacity 0.3s;
+            z-index: 1000;
+            opacity: 0;
+        }
+
+        .scroll-top.visible {
+            display: flex;
+            opacity: 1;
+        }
+
+        .scroll-top:hover {
+            transform: scale(1.15);
+        }
+
+        /* No posts message */
+        .no-posts {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 3rem;
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        /* Responsive */
+        @media (min-width: 769px) {
+            .header-inner p {
+                display: block;
+            }
+        }
+
+        @media (max-width: 768px) {
+            header {
+                padding: 0.4rem 0;
+            }
+            .header-inner h1 {
+                font-size: 1.1rem;
+            }
+            nav a {
+                font-size: 0.78rem;
+                padding: 0.2rem 0.6rem;
+            }
+            .content-wrapper {
+                grid-template-columns: 1fr;
+            }
+            .posts-grid {
+                grid-template-columns: 1fr;
+            }
+            .featured h2 {
+                font-size: 1.2rem;
+            }
+            .full-article {
+                padding: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Loader -->
+    <div class="loader" id="loader">
+        <div class="loader-spinner"></div>
+    </div>
+
     <!-- Header -->
     <header>
         <div class="container">
-            <h1>💰 FinTech Hub</h1>
-            <p>Tu guía completa sobre finanzas personales, inversiones y tecnología</p>
-            <nav>
-                <a href="#home">Inicio</a>
-                <a href="#finanzas">Finanzas</a>
-                <a href="#tecnologia">Tecnología</a>
-                <a href="#criptos">Criptomonedas</a>
-                <a href="#contacto">Contacto</a>
-            </nav>
+            <div class="header-inner">
+                <h1 onclick="filterPosts('all')">💰 FinTech Hub</h1>
+                <p>Finanzas, inversiones y tecnología</p>
+                <nav>
+                    <a href="#" class="active" data-filter="all" onclick="event.preventDefault(); filterPosts('all')">Inicio</a>
+                    <a href="#" data-filter="finanzas" onclick="event.preventDefault(); filterPosts('finanzas')">Finanzas</a>
+                    <a href="#" data-filter="tecnologia" onclick="event.preventDefault(); filterPosts('tecnologia')">Tecnología</a>
+                    <a href="#" data-filter="cripto" onclick="event.preventDefault(); filterPosts('cripto')">Cripto</a>
+                    <a href="#" data-filter="contacto" onclick="event.preventDefault(); filterPosts('contacto')">Contacto</a>
+                </nav>
+            </div>
         </div>
     </header>
 
     <!-- Main Content -->
     <main class="container">
         <!-- Featured Article -->
-        <section class="featured">
-            <h2>📈 Artículo Destacado</h2>
-            <p>¿Cómo comenzar a invertir con poco dinero? Descubre las mejores estrategias para principiantes que desean construir un portafolio sólido. En este artículo te enseñaremos paso a paso cómo empezar a invertir en acciones, fondos indexados y otras opciones de inversión accesibles.</p>
-            <button class="btn">Leer Artículo Completo</button>
+        <section class="featured reveal" id="featured-section">
+            <h2>📈 ¿Cómo empezar a invertir con poco dinero?</h2>
+            <p>Invertir no es solo para ricos. Con montos desde <strong>$50 USD</strong> ya podés empezar a construir tu futuro financiero. El mercado de herramientas de finanzas personales alcanzó los <strong>$8.423 millones USD en 2024</strong> y crece al 5.81% anual, lo que refleja el interés masivo por tomar el control de las finanzas personales. En esta guía te mostramos los primeros pasos para convertirte en inversor sin necesidad de grandes capitales.</p>
+            <p><strong>1. Fondo de emergencia primero:</strong> Antes de invertir, asegurate de tener 3 a 6 meses de gastos en una cuenta de ahorro de alta liquidez. En Latinoamérica, la inflación promedio del 4-6% anual hace urgente que tu dinero no pierda valor durmiendo en el banco.</p>
+            <p><strong>2. Microinversiones:</strong> Apps como Binance (desde $10 USD), Fidelity (desde $1 USD en fracciones) y roboadvisors como Betterment te permiten empezar con montos irrelevantes. Lo importante es el hábito, no la cantidad inicial.</p>
+            <p><strong>3. ETFs y fondos indexados:</strong> Con un ETF del S&P 500 ($SPY) estás comprando las 500 empresas más grandes de EEUU en una sola operación. Históricamente ha rendido ~10% anual promedio. Es la puerta de entrada ideal para principiantes.</p>
+            <p><em>Según la ENIF 2024 en México, el 63% de la población ya tiene una cuenta de ahorro formal. El siguiente paso es invertir.</em></p>
+            <button class="btn" onclick="scrollToArticles()">Ver más artículos ↓</button>
         </section>
 
-        <!-- Ad Space 1 - BidVertiser (reemplazar WIDGET_1_ID tras registrarse) -->
-        <div class="ad-container">
+        <!-- Ad Space 1 - BidVertiser -->
+        <div class="ad-container reveal">
             <div id="bidvertiser-ad-1">
                 <script data-cfasync="false" type="text/javascript">
                     // Reemplazar con el código del widget que genere BidVertiser
-                    // Ej: var bdvQ = bdvQ || []; bdvQ.push(['setAccount', 'WIDGET_1_ID']);
                 </script>
             </div>
-            <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">- Publicidad -</p>
+            <p style="color: #999; font-size: 0.8rem;">- Publicidad -</p>
         </div>
 
         <!-- Content Wrapper with Sidebar -->
         <div class="content-wrapper">
             <!-- Posts Grid -->
             <section>
-                <h2 style="color: #667eea; margin-bottom: 2rem;">📚 Artículos Recientes</h2>
-                <div class="posts-grid">
-                    <!-- Post 1 -->
-                    <article class="post-card" onclick="showArticle(1)">
-                        <div class="post-image">📊</div>
-                        <div class="post-content">
-                            <span class="post-category">Finanzas</span>
-                            <h3>Cómo Crear un Presupuesto Efectivo</h3>
-                            <p>Aprende las mejores prácticas para gestionar tu dinero de forma eficiente y alcanzar tus metas financieras.</p>
-                            <div class="post-meta">
-                                <span>15 Nov 2024</span>
-                                <span>8 min lectura</span>
-                            </div>
-                            <a href="#" class="read-more" onclick="event.stopPropagation(); showArticle(1)">Leer más →</a>
-                        </div>
-                    </article>
-
-                    <!-- Post 2 -->
-                    <article class="post-card" onclick="showArticle(2)">
-                        <div class="post-image">🚀</div>
-                        <div class="post-content">
-                            <span class="post-category">Tecnología</span>
-                            <h3>Las Mejores Aplicaciones FinTech de 2024</h3>
-                            <p>Descubre las aplicaciones móviles que están revolucionando la forma en que gestionamos nuestras finanzas.</p>
-                            <div class="post-meta">
-                                <span>14 Nov 2024</span>
-                                <span>6 min lectura</span>
-                            </div>
-                            <a href="#" class="read-more" onclick="event.stopPropagation(); showArticle(2)">Leer más →</a>
-                        </div>
-                    </article>
-
-                    <!-- Post 3 -->
-                    <article class="post-card" onclick="showArticle(3)">
-                        <div class="post-image">₿</div>
-                        <div class="post-content">
-                            <span class="post-category">Criptomonedas</span>
-                            <h3>Bitcoin vs Ethereum: ¿Cuál elegir?</h3>
-                            <p>Comparativa detallada entre las dos criptomonedas más populares. Ventajas, desventajas y casos de uso.</p>
-                            <div class="post-meta">
-                                <span>13 Nov 2024</span>
-                                <span>10 min lectura</span>
-                            </div>
-                            <a href="#" class="read-more" onclick="event.stopPropagation(); showArticle(3)">Leer más →</a>
-                        </div>
-                    </article>
-
-                    <!-- Post 4 -->
-                    <article class="post-card" onclick="showArticle(4)">
-                        <div class="post-image">💳</div>
-                        <div class="post-content">
-                            <span class="post-category">Finanzas</span>
-                            <h3>Cómo Reducir tu Deuda de Tarjeta de Crédito</h3>
-                            <p>Estrategias efectivas para eliminar la deuda rápidamente y mejorar tu situación financiera.</p>
-                            <div class="post-meta">
-                                <span>12 Nov 2024</span>
-                                <span>7 min lectura</span>
-                            </div>
-                            <a href="#" class="read-more" onclick="event.stopPropagation(); showArticle(4)">Leer más →</a>
-                        </div>
-                    </article>
-
-                    <!-- Post 5 -->
-                    <article class="post-card" onclick="showArticle(5)">
-                        <div class="post-image">🤖</div>
-                        <div class="post-content">
-                            <span class="post-category">Tecnología</span>
-                            <h3>IA y Machine Learning en Finanzas</h3>
-                            <p>Cómo la inteligencia artificial está transformando el sector financiero y las oportunidades que genera.</p>
-                            <div class="post-meta">
-                                <span>11 Nov 2024</span>
-                                <span>9 min lectura</span>
-                            </div>
-                            <a href="#" class="read-more" onclick="event.stopPropagation(); showArticle(5)">Leer más →</a>
-                        </div>
-                    </article>
-
-                    <!-- Post 6 -->
-                    <article class="post-card" onclick="showArticle(6)">
-                        <div class="post-image">📱</div>
-                        <div class="post-content">
-                            <span class="post-category">Tecnología</span>
-                            <h3>Seguridad en Finanzas Digitales</h3>
-                            <p>Consejos prácticos para proteger tu dinero en línea y evitar fraudes en el mundo digital.</p>
-                            <div class="post-meta">
-                                <span>10 Nov 2024</span>
-                                <span>8 min lectura</span>
-                            </div>
-                            <a href="#" class="read-more" onclick="event.stopPropagation(); showArticle(6)">Leer más →</a>
-                        </div>
-                    </article>
+                <h2 style="color: #667eea; margin-bottom: 1.5rem; font-size: 1.3rem;" class="reveal" id="section-title">📚 Todos los Artículos</h2>
+                <div class="posts-grid" id="posts-grid">
+                    <!-- Los posts se renderizan via JS -->
                 </div>
 
-                <!-- Ad Space 2 - BidVertiser (reemplazar WIDGET_2_ID tras registrarse) -->
-                <div class="ad-container" style="margin-top: 3rem;">
+                <!-- Ad Space 2 -->
+                <div class="ad-container reveal">
                     <div id="bidvertiser-ad-2">
                         <script data-cfasync="false" type="text/javascript">
                             // Reemplazar con el código del widget que genere BidVertiser
                         </script>
                     </div>
-                    <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">- Publicidad -</p>
+                    <p style="color: #999; font-size: 0.8rem;">- Publicidad -</p>
                 </div>
             </section>
 
             <!-- Sidebar -->
             <aside>
-                <!-- Newsletter -->
-                <div class="newsletter">
+                <div class="newsletter reveal">
                     <h3>📧 Newsletter</h3>
-                    <p>Recibe consejos sobre finanzas cada semana</p>
-                    <input type="email" placeholder="Tu correo...">
-                    <button>Suscribirse</button>
+                    <p>Recibí consejos sobre finanzas cada semana</p>
+                    <input type="email" id="newsletter-email" placeholder="Tu correo...">
+                    <button onclick="subscribeNewsletter()">Suscribirse</button>
                 </div>
 
-                <!-- Trending -->
-                <div class="sidebar">
+                <div class="sidebar reveal">
                     <h3>🔥 Trending</h3>
-                    <div class="sidebar-item">
-                        <a href="#">10 Libros sobre Finanzas que debes leer</a>
-                    </div>
-                    <div class="sidebar-item">
-                        <a href="#">Inflación 2024: Cómo Proteger tu Dinero</a>
-                    </div>
-                    <div class="sidebar-item">
-                        <a href="#">Guía Completa sobre Fondos Indexados</a>
-                    </div>
-                    <div class="sidebar-item">
-                        <a href="#">NFTs: ¿Inversión o Especulación?</a>
-                    </div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(1)">Cómo hacer un presupuesto desde cero</a></div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(3)">Bitcoin vs Ethereum: Comparativa 2026</a></div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(5)">IA y Machine Learning en Finanzas</a></div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(6)">Seguridad en Finanzas Digitales</a></div>
                 </div>
 
-                <!-- Categories -->
-                <div class="sidebar">
+                <div class="sidebar reveal">
                     <h3>📂 Categorías</h3>
-                    <div class="sidebar-item">
-                        <a href="#">Finanzas Personales</a>
-                    </div>
-                    <div class="sidebar-item">
-                        <a href="#">Inversiones</a>
-                    </div>
-                    <div class="sidebar-item">
-                        <a href="#">Criptomonedas</a>
-                    </div>
-                    <div class="sidebar-item">
-                        <a href="#">FinTech</a>
-                    </div>
-                    <div class="sidebar-item">
-                        <a href="#">Empresas</a>
-                    </div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); filterPosts('finanzas')">Finanzas Personales</a></div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); filterPosts('all')">Inversiones</a></div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); filterPosts('cripto')">Criptomonedas</a></div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); filterPosts('tecnologia')">FinTech</a></div>
+                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); filterPosts('all')">Empresas</a></div>
                 </div>
 
-                <!-- Ad Space 3 - BidVertiser (sidebar, reemplazar WIDGET_3_ID tras registrarse) -->
-                <div class="ad-container" style="min-height: 600px;">
+                <!-- Ad Space 3 -->
+                <div class="ad-container reveal" style="min-height: 400px;">
                     <div id="bidvertiser-ad-3">
                         <script data-cfasync="false" type="text/javascript">
                             // Reemplazar con el código del widget que genere BidVertiser
                         </script>
                     </div>
-                    <p style="color: #999; font-size: 0.85rem; margin-top: 0.5rem;">- Publicidad -</p>
+                    <p style="color: #999; font-size: 0.8rem;">- Publicidad -</p>
                 </div>
             </aside>
         </div>
-    </main>
 
-    <!-- Full Articles Section -->
-    <div class="container" id="article-container">
-        <!-- Article 1 -->
-        <article class="full-article" id="article-1">
-            <button class="close-btn" onclick="hideArticle(1)">✕</button>
-            <h2>Cómo Crear un Presupuesto Efectivo</h2>
-            <div class="tags">
-                <span class="tag">Finanzas</span>
-                <span class="tag">Presupuesto</span>
-                <span class="tag">Ahorro</span>
-            </div>
-            <p>Crear un presupuesto es el primer paso para tomar el control de tus finanzas personales. Sin un presupuesto, es fácil perder la noción de a dónde va tu dinero cada mes. La clave está en diseñar un sistema que se adapte a tu estilo de vida y te permita alcanzar tus metas financieras.</p>
-            <p><strong>Paso 1: Calcula tus ingresos mensuales.</strong> Suma todas tus fuentes de ingreso después de impuestos: salario, freelancing, inversiones, rentas, etc. Tener una cifra clara te permitirá saber cuánto puedes destinar a cada categoría.</p>
-            <p><strong>Paso 2: Registra tus gastos fijos.</strong> Incluye alquiler o hipoteca, servicios, seguros, transporte y alimentación. Estos son los gastos que no puedes evitar y deben ser tu prioridad.</p>
-            <p><strong>Paso 3: Identifica gastos variables.</strong> Salidas a comer, suscripciones, entretenimiento y compras impulsivas. Aquí es donde la mayoría de las personas encuentran oportunidades de ahorro significativas.</p>
-            <p>La regla 50/30/20 es un excelente punto de partida: destina el 50% de tus ingresos a necesidades, el 30% a deseos y el 20% a ahorro e inversión. Ajusta estos porcentajes según tus objetivos personales y revisa tu presupuesto mensualmente para mantener el rumbo.</p>
-            <p><em>Publicado el 15 Nov 2024 · 8 min de lectura</em></p>
-            <div class="share-buttons">
-                <span>Compartir:</span>
-                <a href="#" class="share-btn facebook" onclick="shareArticle('facebook', 1)">Facebook</a>
-                <a href="#" class="share-btn twitter" onclick="shareArticle('twitter', 1)">Twitter</a>
-                <a href="#" class="share-btn whatsapp" onclick="shareArticle('whatsapp', 1)">WhatsApp</a>
-                <a href="#" class="share-btn linkedin" onclick="shareArticle('linkedin', 1)">LinkedIn</a>
-            </div>
-        </article>
+        <!-- Contact Form Section -->
+        <section class="contact-form reveal" id="contact-section" style="display: none;">
+            <h2>📬 Contacto</h2>
+            <p style="margin-bottom: 1rem;">¿Tenés preguntas, sugerencias o querés colaborar con nosotros? Escribinos y te respondemos a la brevedad.</p>
+            <form onsubmit="return handleContact(event)">
+                <input type="text" placeholder="Tu nombre" required>
+                <input type="email" placeholder="Tu correo electrónico" required>
+                <input type="text" placeholder="Asunto">
+                <textarea placeholder="Escribí tu mensaje acá..." required></textarea>
+                <button type="submit" class="btn">Enviar mensaje</button>
+            </form>
+        </section>
 
-        <!-- Article 2 -->
-        <article class="full-article" id="article-2">
-            <button class="close-btn" onclick="hideArticle(2)">✕</button>
-            <h2>Las Mejores Aplicaciones FinTech de 2024</h2>
-            <div class="tags">
-                <span class="tag">Tecnología</span>
-                <span class="tag">FinTech</span>
-                <span class="tag">Apps</span>
-            </div>
-            <p>El ecosistema FinTech ha crecido exponencialmente, ofreciendo herramientas que hacen que gestionar tu dinero sea más fácil, rápido y accesible que nunca. Estas son las aplicaciones que están marcando la diferencia en 2024.</p>
-            <p><strong>Revolut:</strong> Más que una app bancaria, Revolut ofrece cambio de divisas sin comisiones, criptomonedas, acciones fraccionadas y seguros de viaje, todo desde una sola plataforma. Ideal para viajeros y nómadas digitales.</p>
-            <p><strong>N26:</strong> Este neobanco alemán destaca por su interfaz limpia y notificaciones en tiempo real. Sus espacios permiten apartar dinero para objetivos específicos, facilitando el ahorro sin esfuerzo.</p>
-            <p><strong>YNAB (You Need A Budget):</strong> La app de presupuestos más popular del mercado. Con su metodología de "darle un trabajo a cada dólar", te ayuda a ser intencional con tu dinero y salir de deudas.</p>
-            <p><strong>Binance:</strong> El exchange más grande del mundo sigue innovando con su app, ofreciendo desde trading simple hasta staking, ahorros flexibles y su propia tarjeta de débito cripto.</p>
-            <p><strong>Fidelity / Vanguard:</strong> Para inversores tradicionales, estas apps ofrecen ETFs, fondos indexados y herramientas de planificación para la jubilación con comisiones mínimas o cero.</p>
-            <p>La tendencia es clara: las FinTech están democratizando las finanzas, ofreciendo servicios que antes solo estaban disponibles para grandes inversores. Elegir la app correcta depende de tus necesidades específicas, pero todas comparten el objetivo de ponerte en control de tu dinero.</p>
-            <p><em>Publicado el 14 Nov 2024 · 6 min de lectura</em></p>
-            <div class="share-buttons">
-                <span>Compartir:</span>
-                <a href="#" class="share-btn facebook" onclick="shareArticle('facebook', 2)">Facebook</a>
-                <a href="#" class="share-btn twitter" onclick="shareArticle('twitter', 2)">Twitter</a>
-                <a href="#" class="share-btn whatsapp" onclick="shareArticle('whatsapp', 2)">WhatsApp</a>
-                <a href="#" class="share-btn linkedin" onclick="shareArticle('linkedin', 2)">LinkedIn</a>
-            </div>
-        </article>
-
-        <!-- Article 3 -->
-        <article class="full-article" id="article-3">
-            <button class="close-btn" onclick="hideArticle(3)">✕</button>
-            <h2>Bitcoin vs Ethereum: ¿Cuál elegir?</h2>
-            <div class="tags">
-                <span class="tag">Criptomonedas</span>
-                <span class="tag">Bitcoin</span>
-                <span class="tag">Ethereum</span>
-            </div>
-            <p>Bitcoin y Ethereum son las dos criptomonedas más importantes del mercado, pero cumplen funciones muy diferentes. Entender sus diferencias es clave para decidir cuál se alinea mejor con tus objetivos de inversión.</p>
-            <p><strong>Bitcoin (BTC)</strong> es la criptomoneda original, creada como una reserva de valor digital. Su oferta limitada a 21 millones de monedas lo convierte en un activo deflacionario, similar al oro digital. Es ideal para inversores que buscan proteger su capital contra la inflación y la devaluación de monedas fiduciarias.</p>
-            <p><strong>Ethereum (ETH)</strong> va más allá de ser una simple criptomoneda. Su blockchain permite ejecutar contratos inteligentes y aplicaciones descentralizadas (dApps). Con la transición a Proof of Stake (PoS), Ethereum redujo drásticamente su consumo energético y abrió la puerta a staking, permitiendo a los holders generar rendimientos pasivos.</p>
-            <p><strong>¿Cuál elegir?</strong> Si buscas un activo de refugio a largo plazo con menor riesgo relativo, Bitcoin es tu mejor opción. Si prefieres exposición al ecosistema de finanzas descentralizadas (DeFi) y estás dispuesto a asumir mayor volatilidad, Ethereum ofrece más versatilidad y potencial de crecimiento.</p>
-            <p>Muchos inversores optan por tener ambas en su portafolio: Bitcoin como pilar de estabilidad y Ethereum como apuesta de crecimiento tecnológico. La diversificación siempre es una estrategia inteligente en el mundo cripto.</p>
-            <p><em>Publicado el 13 Nov 2024 · 10 min de lectura</em></p>
-            <div class="share-buttons">
-                <span>Compartir:</span>
-                <a href="#" class="share-btn facebook" onclick="shareArticle('facebook', 3)">Facebook</a>
-                <a href="#" class="share-btn twitter" onclick="shareArticle('twitter', 3)">Twitter</a>
-                <a href="#" class="share-btn whatsapp" onclick="shareArticle('whatsapp', 3)">WhatsApp</a>
-                <a href="#" class="share-btn linkedin" onclick="shareArticle('linkedin', 3)">LinkedIn</a>
-            </div>
-        </article>
-
-        <!-- Article 4 -->
-        <article class="full-article" id="article-4">
-            <button class="close-btn" onclick="hideArticle(4)">✕</button>
-            <h2>Cómo Reducir tu Deuda de Tarjeta de Crédito</h2>
-            <div class="tags">
-                <span class="tag">Finanzas</span>
-                <span class="tag">Deudas</span>
-                <span class="tag">Tarjetas</span>
-            </div>
-            <p>La deuda de tarjeta de crédito es una de las más caras que puedes tener, con tasas de interés que frecuentemente superan el 30% anual. Salir de ella requiere disciplina y una estrategia clara. Aquí te presentamos los métodos más efectivos.</p>
-            <p><strong>Método Bola de Nieve (Snowball):</strong> Ordena tus deudas de menor a mayor saldo. Paga el mínimo en todas excepto en la más pequeña, a la que destinas todo el dinero extra posible. Una vez liquidada, pasas al siguiente saldo. La ventaja es psicológica: ver resultados rápidos te mantiene motivado.</p>
-            <p><strong>Método Avalancha (Avalanche):</strong> Prioriza las deudas por tasa de interés, pagando primero la más cara. Es matemáticamente más eficiente y te ahorrará más dinero en intereses a largo plazo. Requiere más disciplina, pero es óptimo numéricamente.</p>
-            <p><strong>Consolidación de deuda:</strong> Transferir tus saldos a una tarjeta con 0% APR introductorio o solicitar un préstamo personal a menor tasa puede darte un respiro. Eso sí, asegúrate de no acumular nueva deuda mientras pagas la consolidada.</p>
-            <p>Independientemente del método, el paso más importante es detener la sangría: corta el uso de tus tarjetas mientras pagas la deuda. Usa efectivo o débito hasta que estés libre de deudas y luego reincorpóralas responsablemente.</p>
-            <p><em>Publicado el 12 Nov 2024 · 7 min de lectura</em></p>
-            <div class="share-buttons">
-                <span>Compartir:</span>
-                <a href="#" class="share-btn facebook" onclick="shareArticle('facebook', 4)">Facebook</a>
-                <a href="#" class="share-btn twitter" onclick="shareArticle('twitter', 4)">Twitter</a>
-                <a href="#" class="share-btn whatsapp" onclick="shareArticle('whatsapp', 4)">WhatsApp</a>
-                <a href="#" class="share-btn linkedin" onclick="shareArticle('linkedin', 4)">LinkedIn</a>
-            </div>
-        </article>
-
-        <!-- Article 5 -->
-        <article class="full-article" id="article-5">
-            <button class="close-btn" onclick="hideArticle(5)">✕</button>
-            <h2>IA y Machine Learning en Finanzas</h2>
-            <div class="tags">
-                <span class="tag">Tecnología</span>
-                <span class="tag">IA</span>
-                <span class="tag">Machine Learning</span>
-            </div>
-            <p>La inteligencia artificial está transformando cada aspecto del sector financiero, desde la atención al cliente hasta la gestión de inversiones. Los bancos y las FinTech están adoptando estas tecnologías para ofrecer servicios más personalizados y eficientes.</p>
-            <p><strong>Detección de fraude:</strong> Los algoritmos de machine learning analizan patrones de transacciones en tiempo real para identificar actividades sospechosas. Si tu banco te alerta de una compra inusual antes de que te des cuenta, es gracias a la IA.</p>
-            <p><strong>Asesores robóticos (Robo-advisors):</strong> Plataformas como Betterment, Wealthfront y Ellevest utilizan algoritmos para crear y gestionar portafolios de inversión personalizados. Con comisiones significativamente más bajas que los asesores humanos, están democratizando el acceso a la inversión profesional.</p>
-            <p><strong>Análisis predictivo:</strong> Los fondos de cobertura y los traders institucionales utilizan modelos de machine learning para predecir movimientos del mercado basados en datos históricos, noticias y sentimiento de redes sociales.</p>
-            <p><strong>Chatbots financieros:</strong> Los asistentes virtuales pueden resolver dudas, procesar solicitudes y hasta ofrecer consejos financieros básicos las 24 horas, mejorando la experiencia del cliente y reduciendo costes operativos.</p>
-            <p>La IA no reemplazará completamente a los asesores humanos, pero sí está cambiando las reglas del juego. Los profesionales que sepan aprovechar estas herramientas estarán mejor posicionados en el futuro financiero.</p>
-            <p><em>Publicado el 11 Nov 2024 · 9 min de lectura</em></p>
-            <div class="share-buttons">
-                <span>Compartir:</span>
-                <a href="#" class="share-btn facebook" onclick="shareArticle('facebook', 5)">Facebook</a>
-                <a href="#" class="share-btn twitter" onclick="shareArticle('twitter', 5)">Twitter</a>
-                <a href="#" class="share-btn whatsapp" onclick="shareArticle('whatsapp', 5)">WhatsApp</a>
-                <a href="#" class="share-btn linkedin" onclick="shareArticle('linkedin', 5)">LinkedIn</a>
-            </div>
-        </article>
-
-        <!-- Article 6 -->
-        <article class="full-article" id="article-6">
-            <button class="close-btn" onclick="hideArticle(6)">✕</button>
-            <h2>Seguridad en Finanzas Digitales</h2>
-            <div class="tags">
-                <span class="tag">Tecnología</span>
-                <span class="tag">Seguridad</span>
-                <span class="tag">Ciberseguridad</span>
-            </div>
-            <p>Con el crecimiento de las finanzas digitales, la seguridad se ha convertido en una prioridad absoluta. Los ciberdelincuentes están más sofisticados que nunca, pero hay medidas simples que pueden proteger tu patrimonio digital.</p>
-            <p><strong>Autenticación de dos factores (2FA):</strong> Actívala en todas tus cuentas financieras. Ya sea mediante SMS, apps de autenticación o llaves físicas, el 2FA añade una capa extra de seguridad que puede evitar que accedan a tus cuentas incluso si roban tu contraseña.</p>
-            <p><strong>Contraseñas únicas y gestores:</strong> Usar la misma contraseña en múltiples sitios es uno de los errores más comunes. Un gestor de contraseñas como Bitwarden o 1Password te permite generar y almacenar claves seguras para cada servicio sin tener que recordarlas todas.</p>
-            <p><strong>Cuidado con el phishing:</strong> Nunca hagas clic en enlaces sospechosos ni compartas información financiera por correo o mensajes. Los bancos nunca te pedirán tu contraseña completa por teléfono o email. Siempre accede a tus cuentas escribiendo la URL directamente en el navegador.</p>
-            <p><strong>Redes WiFi seguras:</strong> Evita realizar transacciones bancarias en redes WiFi públicas. Si necesitas hacerlo, usa una VPN de confianza que cifre tu conexión y proteja tus datos de miradas indiscretas.</p>
-            <p><em>Publicado el 10 Nov 2024 · 8 min de lectura</em></p>
-            <div class="share-buttons">
-                <span>Compartir:</span>
-                <a href="#" class="share-btn facebook" onclick="shareArticle('facebook', 6)">Facebook</a>
-                <a href="#" class="share-btn twitter" onclick="shareArticle('twitter', 6)">Twitter</a>
-                <a href="#" class="share-btn whatsapp" onclick="shareArticle('whatsapp', 6)">WhatsApp</a>
-                <a href="#" class="share-btn linkedin" onclick="shareArticle('linkedin', 6)">LinkedIn</a>
-            </div>
-        </article>
+        <!-- Full Articles -->
+        <div id="article-container">
+            <!-- Se renderizan via JS -->
+        </div>
 
         <!-- About Section -->
-        <section class="featured" id="sobre-nosotros">
+        <section class="featured reveal" id="sobre-nosotros">
             <h2>📖 Sobre FinTech Hub</h2>
             <p>FinTech Hub nació con la misión de democratizar la educación financiera. Creemos que todos merecen acceso a información clara, práctica y sin jargon innecesario sobre finanzas personales, inversiones, criptomonedas y tecnología financiera.</p>
-            <p>Nuestro equipo está formado por profesionales de las finanzas, la tecnología y el marketing, apasionados por ayudar a las personas a tomar mejores decisiones con su dinero. Publicamos contenido nuevo cada semana, cubriendo desde conceptos básicos hasta estrategias avanzadas.</p>
-            <p>Si tienes preguntas, sugerencias o quieres colaborar con nosotros, no dudes en escribirnos a <a href="mailto:hola@fintechhub.com" style="color: #667eea;">hola@fintechhub.com</a>. También puedes seguirnos en redes sociales para estar al día de nuestras últimas publicaciones.</p>
+            <p>Según la <strong>Encuesta Nacional de Inclusión Financiera 2024 (ENIF)</strong>, cerca de 8 de cada 10 personas en México ya cuentan con al menos un producto financiero formal, el nivel más alto desde 2015. Sin embargo, <strong>2 de cada 3 colombianos no ahorran</strong> (Superintendencia Financiera, 2025). Nuestro objetivo es cerrar esa brecha con contenido educativo de calidad.</p>
+            <p>Publicamos contenido nuevo cada semana. Seguinos en redes sociales para estar al día.</p>
         </section>
-    </div>
+    </main>
 
-    <!-- Scroll to Top Button -->
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" title="Volver arriba">↑</button>
+    <!-- Scroll to Top -->
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
 
     <!-- Footer -->
     <footer>
@@ -815,51 +782,267 @@
             <h3>FinTech Hub</h3>
             <p>Tu fuente de información sobre finanzas, inversiones y tecnología</p>
             <div class="footer-links">
+                <a href="#" onclick="event.preventDefault(); filterPosts('all')">Inicio</a>
                 <a href="#sobre-nosotros">Sobre Nosotros</a>
-                <a href="#">Política de Privacidad</a>
-                <a href="#">Términos de Servicio</a>
-                <a href="#">Contacto</a>
+                <a href="#" onclick="event.preventDefault(); filterPosts('contacto')">Contacto</a>
             </div>
-            <div class="share-buttons" style="justify-content: center; margin-bottom: 1rem;">
-                <a href="#" class="share-btn facebook">Facebook</a>
-                <a href="#" class="share-btn twitter">Twitter</a>
-                <a href="#" class="share-btn linkedin">LinkedIn</a>
+            <div class="share-buttons" style="justify-content: center; margin-bottom: 0.8rem;">
+                <a href="#" class="share-btn facebook" onclick="shareSite('facebook')">Facebook</a>
+                <a href="#" class="share-btn twitter" onclick="shareSite('twitter')">Twitter</a>
+                <a href="#" class="share-btn linkedin" onclick="shareSite('linkedin')">LinkedIn</a>
             </div>
-            <p>&copy; 2024 FinTech Hub. Todos los derechos reservados.</p>
-            <p style="font-size: 0.9rem; opacity: 0.8;">Descargo de responsabilidad: Este blog proporciona información general. Consulta con un asesor financiero profesional antes de tomar decisiones de inversión.</p>
+            <p>&copy; 2026 FinTech Hub. Todos los derechos reservados.</p>
         </div>
     </footer>
 
-    <!-- JavaScript -->
     <script>
-        // Show full article
+        // ============ DATA ============
+        var articles = [
+            {
+                id: 1,
+                category: 'finanzas',
+                categoryLabel: 'Finanzas',
+                emoji: '📊',
+                title: 'Cómo hacer un presupuesto mensual desde cero',
+                summary: 'Aprende el método 50/30/20 y tomá el control de tu dinero. El 60% de los consumidores busca activamente herramientas de presupuesto.',
+                date: '28 Jun 2026',
+                readTime: '7 min',
+                tags: ['Presupuesto', 'Ahorro', 'Finanzas'],
+                content: [
+                    'Crear un presupuesto es el primer paso hacia la libertad financiera. Según estudios de mercado, el 60% de los consumidores expresan el deseo de contar con herramientas que faciliten el seguimiento de gastos e ingresos. El mercado de herramientas de finanzas personales está valuado en $8.423 millones USD (2024) y crece al 5.81% anual.',
+                    '<strong>Paso 1: Conocé tus ingresos reales.</strong> Sumá todas tus fuentes de ingreso después de impuestos. No incluyas aguinaldos o bonos que no sean regulares.',
+                    '<strong>Paso 2: Registrá cada gasto durante 30 días.</strong> Usá apps como YNAB, Fintonic o simplemente Excel. Los gastos hormiga (café, snacks, suscripciones) suelen representar entre el 15-20% del presupuesto sin que lo notes.',
+                    '<strong>Paso 3: Aplicá la regla 50/30/20.</strong> Destiná el 50% a necesidades (alquiler, comida, servicios), 30% a deseos (ocio, viajes) y 20% a ahorro e inversión. Ajustá los porcentajes según tus metas.',
+                    '<strong>Dato clave:</strong> En México, el 63% de la población tiene una cuenta de ahorro formal (ENIF 2024), pero solo el 20% sigue un presupuesto estructurado. La diferencia entre tener cuenta y usarla inteligentemente es la educación financiera.'
+                ]
+            },
+            {
+                id: 2,
+                category: 'tecnologia',
+                categoryLabel: 'Tecnología',
+                emoji: '🚀',
+                title: 'Aplicaciones FinTech que transforman tus finanzas',
+                summary: 'Descubrí las apps que están revolucionando la banca, las inversiones y el ahorro personal en 2026.',
+                date: '26 Jun 2026',
+                readTime: '6 min',
+                tags: ['FinTech', 'Apps', 'Tecnología'],
+                content: [
+                    'El ecosistema FinTech sigue expandiéndose a pasos agigantados. Más del 50% de los usuarios prefieren herramientas que ofrecen un conjunto integral de servicios financieros: presupuestos, inversiones y ahorros todo en uno.',
+                    '<strong>Revolut:</strong> Ideal para viajeros y nómadas digitales. Ofrece cambio de divisas sin comisiones, acciones fraccionadas, cripto y seguros. Más de 40 millones de usuarios la usan globalmente.',
+                    '<strong>N26:</strong> Este neobanco alemán destaca por sus "Espacios" para apartar dinero automáticamente hacia metas específicas. Perfecto para quienes quieren ahorrar sin pensarlo.',
+                    '<strong>YNAB (You Need A Budget):</strong> La app de presupuestos más potente del mercado. Su metodología de "darle un trabajo a cada dólar" ha ayudado a miles a salir de deudas. Ofrece 34 días de prueba gratuita.',
+                    '<strong>Fidelity / Vanguard:</strong> Para inversores tradicionales, ofrecen ETFs y fondos indexados con comisiones cercanas a cero. Podés empezar a invertir desde $1 USD con acciones fraccionadas.',
+                    '<strong>Binance:</strong> El exchange más grande del mundo permite desde trading simple hasta staking con rendimientos del 3-12% anual en cripto. Su programa "Learn & Earn" paga en cripto por aprender.'
+                ]
+            },
+            {
+                id: 3,
+                category: 'cripto',
+                categoryLabel: 'Criptomonedas',
+                emoji: '₿',
+                title: 'Bitcoin vs Ethereum: Comparativa completa 2026',
+                summary: 'BTC a $60.365 y ETH a $1.583 (junio 2026). Sus máximos históricos fueron $126.198 y $4.954 respectivamente. ¿Cuál elegir?',
+                date: '25 Jun 2026',
+                readTime: '9 min',
+                tags: ['Bitcoin', 'Ethereum', 'Cripto'],
+                content: [
+                    'Bitcoin y Ethereum son las dos criptomonedas más importantes del mercado, pero cumplen funciones radicalmente distintas. Con BTC en <strong>$60.365</strong> y ETH en <strong>$1.583</strong> (26 de junio de 2026), entender sus diferencias es clave para decidir.',
+                    '<strong>Bitcoin (BTC) - El oro digital:</strong> Creado en 2009 como reserva de valor. Su oferta está limitada a 21 millones de monedas, lo que lo hace deflacionario. Su máximo histórico fue <strong>$126.198</strong> (octubre 2025). Es ideal para protección contra inflación y tiene una dominancia de mercado del 58.13%.',
+                    '<strong>Ethereum (ETH) - La computadora mundial:</strong> Más que una cripto, es una plataforma para contratos inteligentes y dApps. Con la transición a Proof of Stake en 2022, redujo su consumo energético en un 99.9%. Su máximo histórico fue <strong>$4.954</strong> (agosto 2025). Ofrece rendimientos por staking (~3-5% anual).',
+                    '<strong>¿Cuál conviene?</strong> Si buscás un activo de refugio a largo plazo con menor riesgo, Bitcoin es tu mejor opción. Si preferís exposición al ecosistema DeFi y más potencial de crecimiento (con mayor volatilidad), Ethereum ofrece más versatilidad.',
+                    '<strong>Dato:</strong> En junio 2026, BTC cayó 18.8% en el mes y ETH 21.9%, afectados por datos de inflación en EEUU (PCE en máximos de 3 años). Las criptos actúan como activos de "de-risking" líquidos en contextos macro adversos.'
+                ]
+            },
+            {
+                id: 4,
+                category: 'finanzas',
+                categoryLabel: 'Finanzas',
+                emoji: '💳',
+                title: 'Cómo eliminar tus deudas de tarjeta de crédito',
+                summary: 'Las tasas de interés en tarjetas superan el 30% anual. Estrategias bola de nieve y avalancha para liberarte en menos de 12 meses.',
+                date: '23 Jun 2026',
+                readTime: '7 min',
+                tags: ['Deudas', 'Tarjetas', 'Finanzas'],
+                content: [
+                    'La deuda de tarjeta de crédito es una de las más caras del sistema financiero, con tasas que frecuentemente superan el <strong>30% anual</strong> en Latinoamérica. Salir de ella requiere estrategia, no solo fuerza de voluntad.',
+                    '<strong>Método Bola de Nieve (Snowball):</strong> Ordená tus deudas de menor a mayor saldo. Pagá el mínimo en todas excepto la más chica. Una vez liquidada, aplicá ese pago a la siguiente. La ventaja es psicológica: ver resultados rápidos te mantiene motivado.',
+                    '<strong>Método Avalancha (Avalanche):</strong> Priorizá por tasa de interés, pagando primero la más cara. Matemáticamente es más eficiente y te ahorra más dinero en intereses. Requiere más disciplina pero es óptimo.',
+                    '<strong>Consolidación:</strong> Transferí saldos a una tarjeta con 0% APR introductorio o pedí un préstamo personal a tasa menor. En México, la Condusef reporta que las tasas de préstamos personales promedian 25% vs 40-60% de tarjetas.',
+                    '<strong>Regla de oro:</strong> Mientras pagás deudas, no acumules nuevas. Usá efectivo o débito. Cortá el ciclo antes de empezar a construir riqueza.'
+                ]
+            },
+            {
+                id: 5,
+                category: 'tecnologia',
+                categoryLabel: 'Tecnología',
+                emoji: '🤖',
+                title: 'IA y Machine Learning en el mundo financiero',
+                summary: 'La inteligencia artificial está transformando desde la detección de fraudes hasta la gestión automatizada de inversiones.',
+                date: '21 Jun 2026',
+                readTime: '8 min',
+                tags: ['IA', 'Machine Learning', 'FinTech'],
+                content: [
+                    'La inteligencia artificial está redefiniendo cada aspecto del sector financiero. Desde la detección de fraudes en milisegundos hasta asesores robóticos que gestionan portafolios, la IA democratiza servicios que antes eran exclusivos de grandes instituciones.',
+                    '<strong>Detección de fraude:</strong> Los algoritmos de ML analizan patrones de transacciones en tiempo real. Si tu banco te alerta de una compra sospechosa antes de que la autorices, es IA trabajando. Según McKinsey, la IA reduce los falsos positivos en fraude hasta un 50%.',
+                    '<strong>Robo-advisors:</strong> Plataformas como Betterment, Wealthfront y Ellevest usan algoritmos para crear portafolios personalizados con comisiones del 0.25% anual, frente al 1-2% de asesores humanos. Gestionan más de $500 mil millones combinados.',
+                    '<strong>Análisis predictivo:</strong> Fondos de cobertura usan modelos de lenguaje natural para analizar noticias, redes sociales y reportes financieros, prediciendo movimientos de mercado con precisión creciente.',
+                    '<strong>Chatbots financieros:</strong> Atención al cliente 24/7, procesamiento de solicitudes y hasta consejos financieros básicos. Los asistentes virtuales ya resuelven el 80% de las consultas sin intervención humana.',
+                    '<strong>El futuro:</strong> La computación cuántica promete revolucionar el modelado de riesgos y la optimización de portafolios. Empresas como IBM y Google ya colaboran con bancos en casos de uso piloto.'
+                ]
+            },
+            {
+                id: 6,
+                category: 'cripto',
+                categoryLabel: 'Criptomonedas',
+                emoji: '📱',
+                title: 'Guía segura para comprar tu primer Bitcoin',
+                summary: 'Pasos prácticos para comprar BTC sin caer en estafas. Desde elegir exchange hasta almacenar en cold wallet.',
+                date: '19 Jun 2026',
+                readTime: '9 min',
+                tags: ['Bitcoin', 'Seguridad', 'Cripto'],
+                content: [
+                    'Comprar Bitcoin por primera vez puede ser intimidante. Entre exchanges, wallets, keys y estafas, hay mucho por conocer antes de dar el paso. Esta guía te lleva de la mano.',
+                    '<strong>1. Elegí un exchange confiable:</strong> Para empezar, usá plataformas reguladas como Binance, Kraken o Coinbase. Verificá que tengan licencias en tu país. Nunca compres cripto en WhatsApp o Telegram, son estafas.',
+                    '<strong>2. Activá seguridad máxima:</strong> Autenticación de dos factores (2FA) con app tipo Google Authenticator o Authy. Nunca uses SMS como único 2FA (es vulnerable a SIM swapping).',
+                    '<strong>3. Comprá en el exchange:</strong> Vinculá una cuenta bancaria o tarjeta. Comprá montos pequeños al principio. El mínimo en Binance es ~$10 USD. Hay aproximadamente 38.070 criptomonedas en el mercado, empezá solo con BTC.',
+                    '<strong>4. Retirá a tu wallet:</strong> Dejá tus cripto en el exchange solo si vas a tradear. Para holdear a largo plazo, usá una cold wallet como Ledger o Trezor. Recordá: "Not your keys, not your coins."',
+                    '<strong>5. Seguí aprendiendo:</strong> El mercado cripto tiene una capitalización total de $2.08 billones (junio 2026). La educación es tu mejor inversión. Leé whitepapers, seguí fuentes confiables y nunca invirtás más de lo que estés dispuesto a perder.'
+                ]
+            }
+        ];
+
+        // ============ RENDER ============
+        function renderPosts(filter) {
+            var grid = document.getElementById('posts-grid');
+            var title = document.getElementById('section-title');
+            var filtered = filter === 'all' ? articles : articles.filter(function(a) { return a.category === filter; });
+
+            if (filter === 'contacto') {
+                document.getElementById('contact-section').style.display = 'block';
+                document.getElementById('featured-section').style.display = 'none';
+                document.getElementById('sobre-nosotros').style.display = 'none';
+                grid.innerHTML = '<div class="no-posts">📬 Completá el formulario y te responderemos pronto.</div>';
+                title.textContent = '📬 Contacto';
+                hideAllArticles();
+                return;
+            }
+
+            document.getElementById('contact-section').style.display = 'none';
+            document.getElementById('featured-section').style.display = 'block';
+            document.getElementById('sobre-nosotros').style.display = 'block';
+
+            var labels = { all: '📚 Todos los Artículos', finanzas: '💰 Finanzas', tecnologia: '📱 Tecnología', cripto: '🪙 Criptomonedas' };
+            title.textContent = labels[filter] || '📚 Artículos';
+
+            if (filtered.length === 0) {
+                grid.innerHTML = '<div class="no-posts">No hay artículos en esta categoría.</div>';
+                return;
+            }
+
+            var html = '';
+            for (var i = 0; i < filtered.length; i++) {
+                var a = filtered[i];
+                html += '<article class="post-card reveal" onclick="showArticle(' + a.id + ')">' +
+                    '<div class="post-image">' + a.emoji + '</div>' +
+                    '<div class="post-content">' +
+                    '<span class="post-category">' + a.categoryLabel + '</span>' +
+                    '<h3>' + a.title + '</h3>' +
+                    '<p>' + a.summary + '</p>' +
+                    '<div class="post-meta">' +
+                    '<span>' + a.date + '</span>' +
+                    '<span>' + a.readTime + '</span>' +
+                    '</div></div></article>';
+            }
+            grid.innerHTML = html;
+            hideAllArticles();
+
+            setTimeout(function() {
+                var cards = grid.querySelectorAll('.reveal');
+                for (var i = 0; i < cards.length; i++) {
+                    (function(index) {
+                        setTimeout(function() {
+                            cards[index].classList.add('visible');
+                        }, index * 100);
+                    })(i);
+                }
+            }, 50);
+        }
+
+        function renderArticles() {
+            var container = document.getElementById('article-container');
+            var html = '';
+            for (var i = 0; i < articles.length; i++) {
+                var a = articles[i];
+                html += '<article class="full-article" id="article-' + a.id + '">' +
+                    '<button class="close-btn" onclick="hideArticle(' + a.id + ')">✕</button>' +
+                    '<h2>' + a.title + '</h2>' +
+                    '<div class="tags">';
+                for (var j = 0; j < a.tags.length; j++) {
+                    html += '<span class="tag">' + a.tags[j] + '</span>';
+                }
+                html += '</div>';
+                for (var k = 0; k < a.content.length; k++) {
+                    html += '<p>' + a.content[k] + '</p>';
+                }
+                html += '<p><em>Publicado el ' + a.date + ' · ' + a.readTime + ' de lectura</em></p>' +
+                    '<div class="share-buttons">' +
+                    '<span style="font-size:0.85rem;color:#666;">Compartir:</span>' +
+                    '<a href="#" class="share-btn facebook" onclick="event.preventDefault(); shareArticle(\'facebook\',' + a.id + ')">Facebook</a>' +
+                    '<a href="#" class="share-btn twitter" onclick="event.preventDefault(); shareArticle(\'twitter\',' + a.id + ')">Twitter</a>' +
+                    '<a href="#" class="share-btn whatsapp" onclick="event.preventDefault(); shareArticle(\'whatsapp\',' + a.id + ')">WhatsApp</a>' +
+                    '<a href="#" class="share-btn linkedin" onclick="event.preventDefault(); shareArticle(\'linkedin\',' + a.id + ')">LinkedIn</a>' +
+                    '</div></article>';
+            }
+            container.innerHTML = html;
+        }
+
+        // ============ FILTERS ============
+        function filterPosts(filter) {
+            var navLinks = document.querySelectorAll('nav a');
+            for (var i = 0; i < navLinks.length; i++) {
+                navLinks[i].classList.remove('active');
+                if (navLinks[i].getAttribute('data-filter') === filter) {
+                    navLinks[i].classList.add('active');
+                }
+            }
+            renderPosts(filter);
+
+            // Scroll to posts grid
+            var target = document.getElementById('posts-grid');
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // ============ ARTICLES ============
         function showArticle(id) {
-            document.querySelectorAll('.full-article').forEach(function(a) {
-                a.classList.remove('active');
-            });
-            document.getElementById('article-' + id).classList.add('active');
-            document.getElementById('article-' + id).scrollIntoView({ behavior: 'smooth', block: 'start' });
+            hideAllArticles();
+            var el = document.getElementById('article-' + id);
+            if (el) {
+                el.classList.add('active');
+                el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
 
-        // Hide full article
         function hideArticle(id) {
-            document.getElementById('article-' + id).classList.remove('active');
+            var el = document.getElementById('article-' + id);
+            if (el) el.classList.remove('active');
         }
 
-        // Share article
+        function hideAllArticles() {
+            var all = document.querySelectorAll('.full-article');
+            for (var i = 0; i < all.length; i++) {
+                all[i].classList.remove('active');
+            }
+        }
+
+        // ============ SHARE ============
         function shareArticle(platform, id) {
-            var titles = [
-                'Cómo Crear un Presupuesto Efectivo',
-                'Las Mejores Aplicaciones FinTech de 2024',
-                'Bitcoin vs Ethereum: ¿Cuál elegir?',
-                'Cómo Reducir tu Deuda de Tarjeta de Crédito',
-                'IA y Machine Learning en Finanzas',
-                'Seguridad en Finanzas Digitales'
-            ];
-            var title = titles[id - 1] || 'FinTech Hub';
+            var a = articles[id - 1];
+            if (!a) return;
+            var title = a.title;
             var url = window.location.href.split('#')[0] + '#article-' + id;
             var shareUrl = '';
-
             switch(platform) {
                 case 'facebook':
                     shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
@@ -874,13 +1057,65 @@
                     shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
                     break;
             }
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
 
-            if (shareUrl) {
-                window.open(shareUrl, '_blank', 'width=600,height=400');
+        function shareSite(platform) {
+            var url = window.location.href;
+            var title = 'FinTech Hub - Finanzas, Inversiones y Tecnología';
+            var shareUrl = '';
+            switch(platform) {
+                case 'facebook':
+                    shareUrl = 'https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url);
+                    break;
+                case 'twitter':
+                    shareUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url);
+                    break;
+                case 'linkedin':
+                    shareUrl = 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url);
+                    break;
+            }
+            if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        function scrollToArticles() {
+            var grid = document.getElementById('posts-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        // ============ NEWSLETTER ============
+        function subscribeNewsletter() {
+            var email = document.getElementById('newsletter-email').value;
+            if (!email || !email.includes('@')) {
+                alert('Por favor, ingresá un correo válido.');
+                return;
+            }
+            alert('¡Gracias por suscribirte ' + email + '! Pronto recibirás nuestros consejos financieros.');
+            document.getElementById('newsletter-email').value = '';
+        }
+
+        // ============ CONTACT ============
+        function handleContact(e) {
+            e.preventDefault();
+            alert('¡Mensaje enviado con éxito! Te responderemos a la brevedad.');
+            e.target.reset();
+            return false;
+        }
+
+        // ============ SCROLL REVEAL ============
+        function revealOnScroll() {
+            var elements = document.querySelectorAll('.reveal');
+            for (var i = 0; i < elements.length; i++) {
+                var el = elements[i];
+                var rect = el.getBoundingClientRect();
+                var windowHeight = window.innerHeight;
+                if (rect.top < windowHeight - 60) {
+                    el.classList.add('visible');
+                }
             }
         }
 
-        // Scroll to top button visibility
+        // ============ SCROLL TO TOP ============
         window.addEventListener('scroll', function() {
             var btn = document.getElementById('scrollTop');
             if (window.scrollY > 300) {
@@ -888,7 +1123,22 @@
             } else {
                 btn.classList.remove('visible');
             }
+            revealOnScroll();
         });
+
+        // ============ LOADER ============
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                document.getElementById('loader').classList.add('hidden');
+            }, 500);
+        });
+
+        // ============ INIT ============
+        renderArticles();
+        filterPosts('all');
+
+        // Initial reveal
+        setTimeout(revealOnScroll, 600);
     </script>
 </body>
 </html>
