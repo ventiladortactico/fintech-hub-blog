@@ -14,6 +14,43 @@
     <script data-cfasync="false" type="text/javascript" src="//srv.bidvertiser.com/bidvertiser/bdv_ref.dbm?Ref_Option=PUBLISHER_ID"></script>
 
     <style>
+        :root {
+            --bg: #f5f7fa;
+            --card: #fff;
+            --text: #333;
+            --text-secondary: #666;
+            --text-muted: #999;
+            --border: #eee;
+            --shadow: rgba(0,0,0,0.1);
+            --shadow-hover: rgba(0,0,0,0.15);
+            --gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --accent: #667eea;
+            --accent-hover: #764ba2;
+            --tag-bg: #f0f0f0;
+            --footer-bg: #333;
+            --loader-bg: #f5f7fa;
+            --faq-hover: #f8f9ff;
+            --input-border: #ddd;
+        }
+
+        [data-theme="dark"] {
+            --bg: #0f1117;
+            --card: #1a1d27;
+            --text: #e1e4ed;
+            --text-secondary: #9ca3b4;
+            --text-muted: #6b7280;
+            --border: #2a2d3a;
+            --shadow: rgba(0,0,0,0.3);
+            --shadow-hover: rgba(0,0,0,0.5);
+            --accent: #818cf8;
+            --accent-hover: #a78bfa;
+            --tag-bg: #2a2d3a;
+            --footer-bg: #0a0c12;
+            --loader-bg: #0f1117;
+            --faq-hover: #1e2030;
+            --input-border: #3a3d4a;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -23,8 +60,9 @@
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
-            color: #333;
-            background-color: #f5f7fa;
+            color: var(--text);
+            background-color: var(--bg);
+            transition: background-color 0.3s, color 0.3s;
         }
 
         /* Loader */
@@ -716,9 +754,231 @@
                 padding: 1.2rem;
             }
         }
+
+        /* ===== READING PROGRESS BAR ===== */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            width: 0%;
+            z-index: 10000;
+            transition: width 0.1s;
+        }
+
+        /* ===== DARK MODE TOGGLE ===== */
+        .theme-toggle {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: white;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s, transform 0.3s;
+            margin-left: 0.5rem;
+        }
+        .theme-toggle:hover {
+            background: rgba(255,255,255,0.3);
+            transform: scale(1.1);
+        }
+
+        [data-theme="dark"] .post-card,
+        [data-theme="dark"] .featured,
+        [data-theme="dark"] .sidebar,
+        [data-theme="dark"] .full-article,
+        [data-theme="dark"] .contact-form,
+        [data-theme="dark"] .ad-container,
+        [data-theme="dark"] .faq-item,
+        [data-theme="dark"] .calculator-card {
+            background: var(--card);
+        }
+        [data-theme="dark"] .post-card h3,
+        [data-theme="dark"] .full-article h2,
+        [data-theme="dark"] .contact-form h2,
+        [data-theme="dark"] .calculator-card h3,
+        [data-theme="dark"] .faq-question,
+        [data-theme="dark"] .calculator-label {
+            color: var(--text);
+        }
+        [data-theme="dark"] .post-card p,
+        [data-theme="dark"] .post-meta,
+        [data-theme="dark"] .faq-answer,
+        [data-theme="dark"] .calculator-result {
+            color: var(--text-secondary);
+        }
+        [data-theme="dark"] .tag { background: var(--tag-bg); color: var(--text-secondary); }
+        [data-theme="dark"] .sidebar-item { border-color: var(--border); }
+        [data-theme="dark"] .faq-question { background: var(--card); }
+        [data-theme="dark"] .faq-question:hover { background: var(--faq-hover); }
+        [data-theme="dark"] .contact-form input,
+        [data-theme="dark"] .contact-form textarea,
+        [data-theme="dark"] .calculator-input {
+            background: var(--card);
+            border-color: var(--input-border);
+            color: var(--text);
+        }
+        [data-theme="dark"] .contact-form input:focus,
+        [data-theme="dark"] .contact-form textarea:focus,
+        [data-theme="dark"] .calculator-input:focus {
+            border-color: var(--accent);
+        }
+        [data-theme="dark"] .newsletter input {
+            background: rgba(255,255,255,0.15);
+            color: white;
+        }
+        [data-theme="dark"] .newsletter input::placeholder { color: rgba(255,255,255,0.5); }
+        [data-theme="dark"] nav a.active { background: rgba(255,255,255,0.2); }
+
+        /* ===== SEARCH BAR ===== */
+        .search-wrapper {
+            position: relative;
+            margin-bottom: 1.5rem;
+        }
+        .search-box {
+            width: 100%;
+            padding: 0.75rem 1rem 0.75rem 2.5rem;
+            border: 2px solid var(--input-border);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            background: var(--card);
+            color: var(--text);
+            transition: border-color 0.3s, box-shadow 0.3s;
+            font-family: inherit;
+        }
+        .search-box:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(102,126,234,0.15);
+        }
+        .search-box::placeholder { color: var(--text-muted); }
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-muted);
+            font-size: 1rem;
+            pointer-events: none;
+        }
+
+        /* ===== COMPOUND INTEREST CALCULATOR ===== */
+        .calculator-section {
+            margin: 2rem 0;
+        }
+        .calculator-section h2 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .calculator-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+        }
+        .calculator-card {
+            background: var(--card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px var(--shadow);
+        }
+        .calculator-card h3 {
+            color: var(--accent);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+        .calculator-card label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-bottom: 0.3rem;
+            font-weight: 500;
+        }
+        .calculator-input {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 0.8rem;
+            border: 1px solid var(--input-border);
+            border-radius: 5px;
+            font-size: 0.9rem;
+            background: var(--card);
+            color: var(--text);
+            transition: border-color 0.3s;
+            font-family: inherit;
+        }
+        .calculator-input:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+        .calculator-result {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--accent);
+            margin: 0.5rem 0 1rem;
+        }
+        .calculator-result span {
+            font-size: 0.9rem;
+            font-weight: normal;
+            color: var(--text-muted);
+        }
+        .calc-breakdown {
+            font-size: 0.88rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+        .calc-breakdown strong { color: var(--text); }
+
+        /* ===== RELATED POSTS ===== */
+        .related-posts {
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        .related-posts h4 {
+            color: var(--accent);
+            margin-bottom: 0.8rem;
+            font-size: 1rem;
+        }
+        .related-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.8rem;
+        }
+        .related-item {
+            padding: 0.8rem;
+            background: var(--bg);
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.2s;
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+        }
+        .related-item:hover {
+            background: var(--tag-bg);
+            transform: translateY(-2px);
+        }
+        .related-item strong {
+            display: block;
+            color: var(--text);
+            margin-bottom: 0.2rem;
+            font-size: 0.88rem;
+        }
+
+        @media (max-width: 768px) {
+            .calculator-grid { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar"></div>
+
     <!-- Loader -->
     <div class="loader" id="loader">
         <div class="loader-spinner"></div>
@@ -736,6 +996,7 @@
                     <a href="#" data-filter="tecnologia" onclick="event.preventDefault(); filterPosts('tecnologia')">Tecnología</a>
                     <a href="#" data-filter="cripto" onclick="event.preventDefault(); filterPosts('cripto')">Cripto</a>
                     <a href="#" data-filter="contacto" onclick="event.preventDefault(); filterPosts('contacto')">Contacto</a>
+                    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Modo oscuro">🌙</button>
                 </nav>
             </div>
         </div>
@@ -768,7 +1029,11 @@
         <div class="content-wrapper">
             <!-- Posts Grid -->
             <section>
-                <h2 style="color: #667eea; margin-bottom: 1.5rem; font-size: 1.3rem;" class="reveal" id="section-title">📚 Todos los Artículos</h2>
+                <h2 style="color: var(--accent); margin-bottom: 0.8rem; font-size: 1.3rem;" class="reveal" id="section-title">📚 Todos los Artículos</h2>
+                <div class="search-wrapper reveal">
+                    <span class="search-icon">🔍</span>
+                    <input class="search-box" id="searchBox" type="text" placeholder="Buscá artículos por título, categoría o tags..." oninput="searchArticles(this.value)">
+                </div>
                 <div class="posts-grid" id="posts-grid">
                     <!-- Los posts se renderizan via JS -->
                 </div>
@@ -846,6 +1111,37 @@
             <p>FinTech Hub nació con la misión de democratizar la educación financiera. Creemos que todos merecen acceso a información clara, práctica y sin jargon innecesario sobre finanzas personales, inversiones, criptomonedas y tecnología financiera.</p>
             <p>Según la <strong>Encuesta Nacional de Inclusión Financiera 2024 (ENIF)</strong>, cerca de 8 de cada 10 personas en México ya cuentan con al menos un producto financiero formal, el nivel más alto desde 2015. Sin embargo, <strong>2 de cada 3 colombianos no ahorran</strong> (Superintendencia Financiera, 2025). Nuestro objetivo es cerrar esa brecha con contenido educativo de calidad.</p>
             <p>Publicamos contenido nuevo cada semana. Seguinos en redes sociales para estar al día.</p>
+        </section>
+
+        <!-- Calculator Section -->
+        <section class="calculator-section reveal">
+            <h2>🧮 Calculadora de Interés Compuesto</h2>
+            <p style="margin-bottom: 1.2rem; color: var(--text-secondary);">Simulá cómo crece tu inversión con aportes mensuales. Datos del mercado: el S&P 500 rindió ~10% anual histórico.</p>
+            <div class="calculator-grid">
+                <div class="calculator-card">
+                    <h3>📊 Parámetros</h3>
+                    <label>Monto inicial ($)</label>
+                    <input class="calculator-input" id="calc-initial" type="number" value="1000" min="0" oninput="calcInterest()">
+                    <label>Aporte mensual ($)</label>
+                    <input class="calculator-input" id="calc-monthly" type="number" value="200" min="0" oninput="calcInterest()">
+                    <label>Tasa de interés anual (%)</label>
+                    <input class="calculator-input" id="calc-rate" type="number" value="10" min="0" step="0.1" oninput="calcInterest()">
+                    <label>Años de inversión</label>
+                    <input class="calculator-input" id="calc-years" type="number" value="10" min="1" max="50" oninput="calcInterest()">
+                </div>
+                <div class="calculator-card">
+                    <h3>📈 Resultado</h3>
+                    <div class="calculator-result" id="calc-result">$0</div>
+                    <div class="calc-breakdown" id="calc-breakdown">
+                        <strong>Total aportado:</strong> $0<br>
+                        <strong>Ganancia por interés:</strong> $0<br>
+                        <strong>Rendimiento promedio:</strong> 0%
+                    </div>
+                    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+                        <label style="font-size:0.8rem;">Ajustá los valores y el resultado se actualiza en tiempo real 🚀</label>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- FAQ Section -->
@@ -1070,10 +1366,69 @@
                     '<strong>4. Retirá a tu wallet:</strong> Dejá tus cripto en el exchange solo si vas a tradear. Para holdear a largo plazo, usá una cold wallet como Ledger o Trezor. Recordá: "Not your keys, not your coins."',
                     '<strong>5. Seguí aprendiendo:</strong> El mercado cripto tiene una capitalización total de $2.08 billones (junio 2026). La educación es tu mejor inversión. Leé whitepapers, seguí fuentes confiables y nunca invirtás más de lo que estés dispuesto a perder.'
                 ]
+            },
+            {
+                id: 7,
+                category: 'finanzas',
+                categoryLabel: 'Finanzas',
+                emoji: '🚀',
+                title: 'Emprendimiento Financiero: Cómo Invertir en tu Propio Negocio',
+                summary: 'El 40% de los nuevos negocios fracasa por falta de capital. Aprendé a financiar tu emprendimiento con estrategias reales.',
+                date: '30 Jun 2026',
+                readTime: '7 min',
+                tags: ['Emprendimiento', 'Negocios', 'Inversión'],
+                content: [
+                    'Emprender es una de las formas más poderosas de generar riqueza, pero también una de las más riesgosas. Según el Global Entrepreneurship Monitor (GEM 2025), el 40% de los nuevos negocios fracasan por falta de capital inicial.',
+                    '<strong>1. El mito de la "idea millonaria":</strong> No se trata de tener la idea más innovadora, sino de ejecutar bien. El 80% del éxito emprendedor depende de la ejecución, no de la idea.',
+                    '<strong>2. Bootstrapping vs. inversores:</strong> Financiar tu negocio con recursos propios te da control total, pero limita velocidad. Los inversores ángeles aportan capital y contactos, pero exigen participación accionaria. Evaluá cuál es mejor según tu etapa.',
+                    '<strong>3. El Lean Startup:</strong> Metodología de Eric Ries: construí un Producto Mínimo Viable (MVP), medí resultados, aprendé y pivotá si es necesario. Así reducís el riesgo de fracaso.',
+                    '<strong>4. Financiamiento alternativo:</strong> Crowdfunding, fintech lending y fondos de capital de riesgo son opciones reales. En LATAM, el crowdfunding creció 35% en 2025 (Fintech Americas).',
+                    '<strong>5. Educación financiera para emprendedores:</strong> Llevá tus cuentas claras: separá gastos personales de empresariales, conocé tu flujo de caja y armá un fondo de emergencia de 6 meses antes de emprender.'
+                ]
+            },
+            {
+                id: 8,
+                category: 'finanzas',
+                categoryLabel: 'Finanzas',
+                emoji: '🧠',
+                title: 'Psicología del Dinero: Cómo tus Creencias Afectan tus Finanzas',
+                summary: 'El manejo del dinero es 20% conocimiento técnico y 80% comportamiento. Descubrí los sesgos que te frenan.',
+                date: '30 Jun 2026',
+                readTime: '8 min',
+                tags: ['Psicología', 'Finanzas Personales', 'Comportamiento'],
+                content: [
+                    'El manejo del dinero es 20% conocimiento técnico y 80% comportamiento. El libro "Psicología del Dinero" de Morgan Housel explica por qué las personas toman decisiones financieras aparentemente irracionales.',
+                    '<strong>1. Tu historia financiera moldea tus decisiones:</strong> Creciste en una familia que ahorraba o que gastaba? Esas experiencias tempranas condicionan tu relación con el dinero. Reconocerlo es el primer paso para mejorar.',
+                    '<strong>2. El sesgo de confirmación en inversiones:</strong> Buscamos información que confirme lo que ya creemos. Si pensás que Bitcoin va a subir, solo leés noticias positivas. Buscá activamente opiniones contrarias.',
+                    '<strong>3. La falacia del costo hundido:</strong> "Ya invertí mucho en esta acción, no puedo vender ahora." Error: el dinero ya se perdió. Decidí basado en el futuro, no en el pasado.',
+                    '<strong>4. Gratificación diferida:</strong> El famoso "Estudio del Marshmallow" de Stanford demostró que los niños que podían esperar por una recompensa mayor tenían mejores resultados financieros décadas después. Invertir es gratificación diferida.',
+                    '<strong>5. Minimalismo financiero:</strong> Gastar menos de lo que ganás es la regla de oro. No importa cuánto ganes; si gastás más, nunca serás rico. La riqueza es lo que no se ve.'
+                ]
+            },
+            {
+                id: 9,
+                category: 'finanzas',
+                categoryLabel: 'Finanzas',
+                emoji: '📖',
+                title: 'Educación Financiera desde Cero: Guía para Principiantes',
+                summary: 'Solo el 48% de los mexicanos ahorra formalmente. Empezá desde lo más básico con esta guía paso a paso.',
+                date: '30 Jun 2026',
+                readTime: '9 min',
+                tags: ['Educación', 'Principiantes', 'Ahorro'],
+                content: [
+                    'La educación financiera es la base para tomar decisiones informadas. Según la ENIF 2024, solo el 48% de los mexicanos ahorra formalmente. Acá empezamos desde lo más básico.',
+                    '<strong>1. Presupuesto: la herramienta más poderosa:</strong> La regla 50/30/20: 50% para necesidades, 30% para deseos, 20% para ahorro e inversión. Ajustá los porcentajes según tu realidad, pero mantené la disciplina.',
+                    '<strong>2. Fondo de emergencia:</strong> Antes de invertir, ahorrá 3 a 6 meses de gastos en una cuenta separada. Es tu colchón para imprevistos: no lo toques salvo emergencia real.',
+                    '<strong>3. Deuda buena vs. deuda mala:</strong> Deuda buena: la que genera valor (crédito hipotecario, préstamo educativo). Deuda mala: la que consume tu ingreso (tarjetas al límite, préstamos personales para consumo).',
+                    '<strong>4. El poder del interés compuesto:</strong> Invertí $100 al mes desde los 25 años -> a los 65 tendrías ~$632,000 (asumiendo 10% anual). Usá nuestra calculadora de interés compuesto.',
+                    '<strong>5. Diversificación:</strong> No pongas todos los huevos en la misma canasta. Distribuí entre acciones, bonos, bienes raíces y cripto según tu perfil de riesgo. Los ETFs son una excelente puerta de entrada.'
+                ]
             }
         ];
 
         // ============ RENDER ============
+        var currentFilter = 'all';
+
         function renderPosts(filter) {
             var grid = document.getElementById('posts-grid');
             var title = document.getElementById('section-title');
@@ -1130,11 +1485,22 @@
             }, 50);
         }
 
+        function getRelatedArticles(article, max) {
+            var same = [];
+            for (var i = 0; i < articles.length; i++) {
+                if (articles[i].id !== article.id && articles[i].category === article.category) {
+                    same.push(articles[i]);
+                }
+            }
+            return same.slice(0, max || 4);
+        }
+
         function renderArticles() {
             var container = document.getElementById('article-container');
             var html = '';
             for (var i = 0; i < articles.length; i++) {
                 var a = articles[i];
+                var related = getRelatedArticles(a, 2);
                 html += '<article class="full-article" id="article-' + a.id + '">' +
                     '<button class="close-btn" onclick="hideArticle(' + a.id + ')">✕</button>' +
                     '<h2>' + a.title + '</h2>' +
@@ -1153,13 +1519,29 @@
                     '<a href="#" class="share-btn twitter" onclick="event.preventDefault(); shareArticle(\'twitter\',' + a.id + ')">Twitter</a>' +
                     '<a href="#" class="share-btn whatsapp" onclick="event.preventDefault(); shareArticle(\'whatsapp\',' + a.id + ')">WhatsApp</a>' +
                     '<a href="#" class="share-btn linkedin" onclick="event.preventDefault(); shareArticle(\'linkedin\',' + a.id + ')">LinkedIn</a>' +
-                    '</div></article>';
+                    '</div>';
+                // Related articles
+                if (related.length > 0) {
+                    html += '<div class="related-posts"><h4>📌 Artículos relacionados</h4><div class="related-grid">';
+                    for (var r = 0; r < related.length; r++) {
+                        html += '<div class="related-item" onclick="hideAllArticles();showArticle(' + related[r].id + ')">' +
+                            '<strong>' + related[r].title + '</strong>' +
+                            related[r].summary +
+                        '</div>';
+                    }
+                    html += '</div></div>';
+                }
+                html += '</article>';
             }
             container.innerHTML = html;
         }
 
         // ============ FILTERS ============
         function filterPosts(filter) {
+            currentFilter = filter;
+            // Clear search box when tab changes
+            var sb = document.getElementById('searchBox');
+            if (sb) sb.value = '';
             var navLinks = document.querySelectorAll('nav a');
             for (var i = 0; i < navLinks.length; i++) {
                 navLinks[i].classList.remove('active');
@@ -1295,6 +1677,103 @@
             }
         }
 
+        // ============ SEARCH ============
+        function searchArticles(query) {
+            var grid = document.getElementById('posts-grid');
+            query = query.toLowerCase().trim();
+            if (!query) {
+                renderPosts(currentFilter);
+                return;
+            }
+            var results = [];
+            for (var i = 0; i < articles.length; i++) {
+                var a = articles[i];
+                if (a.title.toLowerCase().includes(query) ||
+                    a.categoryLabel.toLowerCase().includes(query) ||
+                    a.tags.some(function(t) { return t.toLowerCase().includes(query); }) ||
+                    a.summary.toLowerCase().includes(query)) {
+                    results.push(a);
+                }
+            }
+            var html = '';
+            for (var j = 0; j < results.length; j++) {
+                var r = results[j];
+                html += '<article class="post-card reveal" onclick="showArticle(' + r.id + ')">' +
+                    '<div class="post-image">' + r.emoji + '</div>' +
+                    '<div class="post-content">' +
+                    '<span class="post-category">' + r.categoryLabel + '</span>' +
+                    '<h3>' + r.title + '</h3>' +
+                    '<p>' + r.summary + '</p>' +
+                    '<div class="post-meta">' +
+                    '<span>' + r.date + '</span>' +
+                    '<span>' + r.readTime + '</span>' +
+                    '</div></div></article>';
+            }
+            if (results.length === 0) {
+                html = '<div class="no-posts">🔍 No encontramos artículos para "' + query + '". Probá con otras palabras.</div>';
+            }
+            grid.innerHTML = html;
+            hideAllArticles();
+            document.getElementById('section-title').textContent = results.length > 0 ? '🔍 Resultados para "' + query + '"' : '📚 Todos los Artículos';
+        }
+
+        // ============ CALCULATOR ============
+        function calcInterest() {
+            var initial = parseFloat(document.getElementById('calc-initial').value) || 0;
+            var monthly = parseFloat(document.getElementById('calc-monthly').value) || 0;
+            var rate = parseFloat(document.getElementById('calc-rate').value) || 0;
+            var years = parseFloat(document.getElementById('calc-years').value) || 1;
+            var monthlyRate = rate / 100 / 12;
+            var months = years * 12;
+            var total = initial;
+            var totalContrib = initial;
+            for (var i = 0; i < months; i++) {
+                total = total * (1 + monthlyRate) + monthly;
+                totalContrib += monthly;
+            }
+            var earnings = total - totalContrib;
+            var totalContribDisplay = '$' + totalContrib.toLocaleString('en-US', {maximumFractionDigits: 0});
+            var totalDisplay = '$' + total.toLocaleString('en-US', {maximumFractionDigits: 0});
+            var earningsDisplay = '$' + earnings.toLocaleString('en-US', {maximumFractionDigits: 0});
+            var pct = totalContrib > 0 ? ((total / totalContrib - 1) * 100).toFixed(1) : '0.0';
+            document.getElementById('calc-result').innerHTML = totalDisplay + ' <span>total final</span>';
+            document.getElementById('calc-breakdown').innerHTML =
+                '<strong>Total aportado:</strong> ' + totalContribDisplay + '<br>' +
+                '<strong>Ganancia por interés:</strong> ' + earningsDisplay + '<br>' +
+                '<strong>Rendimiento promedio:</strong> ' + pct + '%';
+        }
+
+        // ============ THEME TOGGLE ============
+        function toggleTheme() {
+            var html = document.documentElement;
+            var btn = document.getElementById('themeBtn');
+            if (html.getAttribute('data-theme') === 'dark') {
+                html.removeAttribute('data-theme');
+                btn.textContent = '🌙';
+                localStorage.setItem('theme', 'light');
+            } else {
+                html.setAttribute('data-theme', 'dark');
+                btn.textContent = '☀️';
+                localStorage.setItem('theme', 'dark');
+            }
+        }
+
+        function loadTheme() {
+            var saved = localStorage.getItem('theme');
+            if (saved === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                document.getElementById('themeBtn').textContent = '☀️';
+            }
+        }
+
+        // ============ READING PROGRESS ============
+        function updateProgress() {
+            var scrollTop = window.scrollY;
+            var docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            var progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+            document.getElementById('progress-bar').style.width = progress + '%';
+        }
+
         // ============ SCROLL TO TOP ============
         window.addEventListener('scroll', function() {
             var btn = document.getElementById('scrollTop');
@@ -1304,6 +1783,7 @@
                 btn.classList.remove('visible');
             }
             revealOnScroll();
+            updateProgress();
         });
 
         // ============ LOADER ============
@@ -1316,6 +1796,8 @@
         // ============ INIT ============
         renderArticles();
         filterPosts('all');
+        loadTheme();
+        calcInterest();
 
         // Initial reveal
         setTimeout(revealOnScroll, 600);
