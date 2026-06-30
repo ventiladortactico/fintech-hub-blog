@@ -609,6 +609,82 @@
             font-size: 1.1rem;
         }
 
+        /* FAQ Accordion */
+        .faq-section {
+            margin: 2rem 0;
+        }
+
+        .faq-section h2 {
+            color: #667eea;
+            margin-bottom: 1.2rem;
+            font-size: 1.5rem;
+        }
+
+        .faq-item {
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 0.8rem;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+            overflow: hidden;
+            transition: box-shadow 0.3s;
+        }
+
+        .faq-item:hover {
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+        }
+
+        .faq-question {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            background: white;
+            border: none;
+            text-align: left;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: inherit;
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: #f8f9ff;
+        }
+
+        .faq-question .arrow {
+            font-size: 0.8rem;
+            color: #667eea;
+            transition: transform 0.3s;
+            flex-shrink: 0;
+            margin-left: 1rem;
+        }
+
+        .faq-question.open .arrow {
+            transform: rotate(180deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease;
+            padding: 0 1.2rem;
+            color: #555;
+            line-height: 1.7;
+            font-size: 0.9rem;
+        }
+
+        .faq-answer.open {
+            max-height: 400px;
+            padding: 0 1.2rem 1.2rem;
+        }
+
+        .faq-answer p {
+            margin-top: 0.5rem;
+        }
+
         /* Responsive */
         @media (min-width: 769px) {
             .header-inner p {
@@ -770,6 +846,92 @@
             <p>FinTech Hub nació con la misión de democratizar la educación financiera. Creemos que todos merecen acceso a información clara, práctica y sin jargon innecesario sobre finanzas personales, inversiones, criptomonedas y tecnología financiera.</p>
             <p>Según la <strong>Encuesta Nacional de Inclusión Financiera 2024 (ENIF)</strong>, cerca de 8 de cada 10 personas en México ya cuentan con al menos un producto financiero formal, el nivel más alto desde 2015. Sin embargo, <strong>2 de cada 3 colombianos no ahorran</strong> (Superintendencia Financiera, 2025). Nuestro objetivo es cerrar esa brecha con contenido educativo de calidad.</p>
             <p>Publicamos contenido nuevo cada semana. Seguinos en redes sociales para estar al día.</p>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section reveal">
+            <h2>❓ Preguntas Frecuentes sobre Finanzas</h2>
+            <p style="margin-bottom: 1.5rem; color: #666;">Respuestas basadas en datos reales del mercado financiero latinoamericano.</p>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Cuánto debería ahorrar de mi sueldo cada mes?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>La regla <strong>50/30/20</strong> es el estándar recomendado por economistas: 50% para necesidades, 30% para deseos y 20% para ahorro e inversión. Sin embargo, según la <strong>Superintendencia Financiera de Colombia (2025)</strong>, 2 de cada 3 colombianos no ahorran. En México, la <strong>ENIF 2024</strong> reveló que el 63% tiene una cuenta de ahorro, pero solo el 20% sigue un presupuesto estructurado. Si no podés llegar al 20%, empezá con un 5% o 10% y aumentá progresivamente. Lo importante es el hábito.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Es mejor ahorrar o invertir?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Depende del plazo y el objetivo. <strong>Ahorrar</strong> es para metas a corto plazo (menos de 2 años) y fondos de emergencia. Debe estar en cuentas de alta liquidez, aunque rindan poco (1-5% anual en LATAM). <strong>Invertir</strong> es para metas a mediano/largo plazo (+3 años). El <strong>S&P 500</strong> ha rendido ~10% anual histórico, muy por encima de la inflación promedio de Latinoamérica (~3.5% proyectado para 2026 según el IMF). La estrategia óptima: fondo de emergencia ahorrado primero, luego invertí el resto según tu perfil de riesgo.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Cuánto dinero necesito para empezar a invertir?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Mucho menos de lo que creés. Hoy podés empezar con montos muy accesibles: <strong>desde $1 USD</strong> en acciones fraccionadas con Fidelity o Vanguard, <strong>desde $10 USD</strong> en criptomonedas en Binance, y <strong>desde $50 USD</strong> en ETFs tradicionales. El mercado de herramientas de finanzas personales alcanzó los <strong>$8.423 millones USD en 2024</strong> (creciendo al 5.81% anual), lo que demuestra que cada vez más personas están invirtiendo. No importa el monto inicial, importa la consistencia.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Las criptomonedas son una inversión segura?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Las criptomonedas son <strong>activos de alto riesgo y alta volatilidad</strong>. En junio 2026, Bitcoin cayó un 18.8% en un solo mes, y Ethereum un 21.9%. Su máximo histórico (BTC $126.198 en oct 2025) dista mucho del precio actual ($60.365). Sin embargo, la capitalización total del mercado cripto es de <strong>$2.08 billones</strong> con más de 38.070 criptomonedas. La recomendación de expertos: destiná solo el <strong>5-10% de tu portafolio</strong> a cripto, invertí solo lo que estés dispuesto a perder, y priorizá Bitcoin y Ethereum sobre altcoins especulativas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Cuál es la mejor tarjeta de crédito?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>No existe una "mejor" tarjeta universal, depende de tu perfil de consumo. Las <strong>tarjetas con recompensas</strong> (cashback, millas) son ideales si pagás el total cada mes. Si tenés deuda revolving, priorizá las de <strong>menor tasa de interés</strong>. En LATAM, las tasas de tarjetas oscilan entre <strong>30% y 60% anual</strong>, mientras que los préstamos personales promedian 25%. Consejo clave: si no podés pagar el total al cierre, no uses tarjeta de crédito para consumos diarios.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Cómo afecta la inflación a mis ahorros?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>La inflación es el enemigo silencioso del ahorro. Según el <strong>FMI (abril 2026)</strong>, la inflación en Latinoamérica (excluyendo Argentina y Venezuela) se proyecta en <strong>3.5% para 2026</strong>. Si tu cuenta de ahorro rinde 2% pero la inflación es 3.5%, estás <strong>perdiendo 1.5% de poder adquisitivo por año</strong>. Por eso es clave no dejar todo en efectivo o cuentas de bajo rendimiento. Combiná cuentas de ahorro de alta liquidez (para emergencias) con inversiones en instrumentos que superen la inflación, como ETFs, CETES (México ~9.5% en 2024) o bonos ajustables por inflación.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Qué son los ETFs y por qué son recomendados para principiantes?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>Un <strong>ETF (Exchange Traded Fund)</strong> es un fondo que cotiza en bolsa y sigue un índice, sector o activo. Ejemplo: el ETF <strong>SPY</strong> sigue al S&P 500; al comprarlo, estás invirtiendo en las 500 empresas más grandes de EE.UU. en una sola operación. Sus ventajas: <strong>comisiones bajas</strong> (0.03-0.10% anual), <strong>diversificación inmediata</strong> y <strong>liquidez</strong> (se compra/vende como una acción). Según datos de Vanguard, más del 80% de los fondos activos no superan a su índice de referencia a 10 años, lo que hace a los ETFs la opción más eficiente para la mayoría de los inversores minoristas.</p>
+                </div>
+            </div>
+
+            <div class="faq-item">
+                <button class="faq-question" onclick="toggleFAQ(this)">
+                    ¿Cuánto necesito para jubilarme cómodamente?
+                    <span class="arrow">▼</span>
+                </button>
+                <div class="faq-answer">
+                    <p>La <strong>regla del 4%</strong> sugiere que podés retirar el 4% de tu capital anual sin agotarlo en 30 años. Si necesitás <strong>$1.000 USD/mes</strong> para vivir, necesitás un capital de <strong>$300.000 USD</strong> (1.000 × 12 / 0.04). En LATAM, donde las pensiones públicas promedian el 30-40% del último salario, el ahorro voluntario es esencial. Ejemplo: invirtiendo <strong>$200 USD/mes</strong> desde los 25 años en un portafolio diversificado con rendimiento promedio del 7% anual, a los 65 tendrías aproximadamente <strong>$525.000 USD</strong>. La fórmula mágica no existe, pero empezar temprano y ser consistente sí marca la diferencia.</p>
+                </div>
+            </div>
         </section>
     </main>
 
@@ -1092,6 +1254,24 @@
             }
             alert('¡Gracias por suscribirte ' + email + '! Pronto recibirás nuestros consejos financieros.');
             document.getElementById('newsletter-email').value = '';
+        }
+
+        // ============ FAQ ============
+        function toggleFAQ(btn) {
+            var answer = btn.nextElementSibling;
+            var isOpen = answer.classList.contains('open');
+            // Close all
+            var allAnswers = document.querySelectorAll('.faq-answer');
+            var allBtns = document.querySelectorAll('.faq-question');
+            for (var i = 0; i < allAnswers.length; i++) {
+                allAnswers[i].classList.remove('open');
+                allBtns[i].classList.remove('open');
+            }
+            // Toggle current
+            if (!isOpen) {
+                answer.classList.add('open');
+                btn.classList.add('open');
+            }
         }
 
         // ============ CONTACT ============
