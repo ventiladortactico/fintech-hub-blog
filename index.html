@@ -467,57 +467,6 @@
             gap: 1.5rem;
         }
 
-        /* Newsletter */
-        .newsletter {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .newsletter:hover {
-            transform: scale(1.02);
-        }
-
-        .newsletter h3 {
-            margin-bottom: 0.8rem;
-            font-size: 1rem;
-        }
-
-        .newsletter p {
-            font-size: 0.85rem;
-            margin-bottom: 0.8rem;
-        }
-
-        .newsletter input {
-            width: 100%;
-            padding: 0.6rem;
-            margin-bottom: 0.4rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 0.9rem;
-        }
-
-        .newsletter button {
-            width: 100%;
-            padding: 0.6rem;
-            background: white;
-            color: #667eea;
-            font-weight: bold;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
-            font-size: 0.9rem;
-        }
-
-        .newsletter button:hover {
-            transform: scale(1.02);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        }
-
         /* Contact Form */
         .contact-form {
             background: white;
@@ -645,6 +594,26 @@
             padding: 3rem;
             color: #999;
             font-size: 1.1rem;
+        }
+
+        /* Hero Button */
+        .btn {
+            display: inline-block;
+            background: var(--gradient);
+            color: #fff;
+            padding: 0.75rem 1.8rem;
+            border: none;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            font-family: inherit;
+            margin-top: 0.5rem;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102,126,234,0.4);
         }
 
         /* FAQ Accordion */
@@ -828,11 +797,6 @@
         [data-theme="dark"] .calculator-input:focus {
             border-color: var(--accent);
         }
-        [data-theme="dark"] .newsletter input {
-            background: rgba(255,255,255,0.15);
-            color: white;
-        }
-        [data-theme="dark"] .newsletter input::placeholder { color: rgba(255,255,255,0.5); }
         [data-theme="dark"] nav a.active { background: rgba(255,255,255,0.2); }
 
         /* ===== SEARCH BAR ===== */
@@ -1051,13 +1015,6 @@
 
             <!-- Sidebar -->
             <aside>
-                <div class="newsletter reveal">
-                    <h3>📧 Newsletter</h3>
-                    <p>Recibí consejos sobre finanzas cada semana</p>
-                    <input type="email" id="newsletter-email" placeholder="Tu correo...">
-                    <button onclick="subscribeNewsletter()">Suscribirse</button>
-                </div>
-
                 <div class="sidebar reveal">
                     <h3>🔥 Trending</h3>
                     <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(1)">Cómo hacer un presupuesto desde cero</a></div>
@@ -1627,17 +1584,6 @@
             if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
 
-        // ============ NEWSLETTER ============
-        function subscribeNewsletter() {
-            var email = document.getElementById('newsletter-email').value;
-            if (!email || !email.includes('@')) {
-                alert('Por favor, ingresá un correo válido.');
-                return;
-            }
-            alert('¡Gracias por suscribirte ' + email + '! Pronto recibirás nuestros consejos financieros.');
-            document.getElementById('newsletter-email').value = '';
-        }
-
         // ============ FAQ ============
         function toggleFAQ(btn) {
             var answer = btn.nextElementSibling;
@@ -1698,7 +1644,7 @@
             var html = '';
             for (var j = 0; j < results.length; j++) {
                 var r = results[j];
-                html += '<article class="post-card reveal" onclick="showArticle(' + r.id + ')">' +
+                html += '<article class="post-card" onclick="showArticle(' + r.id + ')">' +
                     '<div class="post-image">' + r.emoji + '</div>' +
                     '<div class="post-content">' +
                     '<span class="post-category">' + r.categoryLabel + '</span>' +
