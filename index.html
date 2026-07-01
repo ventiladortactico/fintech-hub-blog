@@ -690,28 +690,76 @@
         }
 
         @media (max-width: 768px) {
-            header {
-                padding: 0.4rem 0;
-            }
-            .header-inner h1 {
-                font-size: 1.1rem;
-            }
-            nav a {
-                font-size: 0.78rem;
-                padding: 0.2rem 0.6rem;
-            }
-            .content-wrapper {
-                grid-template-columns: 1fr;
-            }
-            .posts-grid {
-                grid-template-columns: 1fr;
-            }
-            .featured h2 {
-                font-size: 1.2rem;
-            }
-            .full-article {
-                padding: 1.2rem;
-            }
+            header { padding: 0.3rem 0; }
+            .header-inner { gap: 0.3rem; }
+            .header-inner h1 { font-size: 1rem; display: flex; align-items: center; }
+            .header-inner h1 svg { width: 22px; height: 22px; margin-right: 4px; }
+            .header-inner p { display: none; }
+            nav { gap: 0.2rem; width: 100%; justify-content: center; }
+            nav a { font-size: 0.72rem; padding: 0.15rem 0.5rem; }
+            .theme-toggle { width: 26px; height: 26px; font-size: 0.85rem; margin-left: 0.2rem; }
+            .content-wrapper { grid-template-columns: 1fr; }
+            .posts-grid { grid-template-columns: 1fr; }
+            .featured { padding: 1rem; }
+            .featured h2 { font-size: 1.1rem; }
+            .featured p { font-size: 0.85rem; }
+            .full-article { padding: 1rem; }
+            .full-article h2 { font-size: 1.15rem; }
+            .full-article p { font-size: 0.88rem; }
+            .post-card { margin: 0 0 0.8rem 0; }
+            .search-box { font-size: 0.82rem; padding: 0.5rem 0.8rem; }
+            .calculator-grid { grid-template-columns: 1fr; }
+            .related-grid { grid-template-columns: 1fr; }
+            .sidebar { padding: 0.8rem; }
+            .faq-question { font-size: 0.88rem; padding: 0.7rem 0.8rem; }
+            .calculator-card { padding: 1rem; }
+            .calculator-input { font-size: 0.85rem; }
+            .share-btn { font-size: 0.72rem; padding: 0.3rem 0.5rem; }
+            .rating-btn { font-size: 0.75rem; padding: 0.25rem 0.6rem; }
+            .ad-container { margin: 0.6rem 0; }
+            .article-actions { padding: 0.6rem 0; }
+            .related-posts { padding: 0.8rem 0; }
+            .related-item { padding: 0.6rem; font-size: 0.82rem; }
+            footer { padding: 1rem 0; font-size: 0.82rem; }
+            .footer-links { gap: 0.5rem; }
+            .footer-links a { font-size: 0.82rem; }
+            .contact-form { padding: 1rem; }
+            .contact-form input, .contact-form textarea { font-size: 0.85rem; }
+        }
+
+        @media (max-width: 480px) {
+            .header-inner h1 { font-size: 0.9rem; }
+            .header-inner h1 svg { width: 18px; height: 18px; }
+            nav a { font-size: 0.65rem; padding: 0.12rem 0.4rem; }
+            .theme-toggle { width: 24px; height: 24px; font-size: 0.75rem; }
+            .post-card h3 { font-size: 0.95rem; }
+            .post-card p { font-size: 0.82rem; }
+            .featured h2 { font-size: 1rem; }
+            .featured p { font-size: 0.8rem; }
+            .full-article h2 { font-size: 1.05rem; }
+            .full-article p { font-size: 0.85rem; }
+            .calculator-card h3 { font-size: 0.95rem; }
+            .calculator-result { font-size: 1.3rem; }
+            .rating-label { font-size: 0.75rem; }
+            .share-buttons .share-btn { font-size: 0.68rem; padding: 0.2rem 0.4rem; }
+            .copy-btn { font-size: 0.68rem; padding: 0.2rem 0.6rem; }
+            .faq-question { font-size: 0.82rem; padding: 0.6rem 0.7rem; }
+            .faq-answer p { font-size: 0.82rem; }
+            .related-item { font-size: 0.78rem; }
+            .related-item strong { font-size: 0.82rem; }
+            .tag { font-size: 0.68rem; padding: 0.1rem 0.4rem; }
+        }
+
+        @media (max-width: 360px) {
+            .header-inner h1 { font-size: 0.82rem; }
+            nav a { font-size: 0.6rem; padding: 0.1rem 0.35rem; }
+            .theme-toggle { width: 22px; height: 22px; font-size: 0.7rem; }
+            .featured h2 { font-size: 0.92rem; }
+            .full-article h2 { font-size: 0.95rem; }
+            .full-article p { font-size: 0.8rem; }
+            .post-card h3 { font-size: 0.88rem; }
+            .post-card p { font-size: 0.78rem; }
+            .post-meta { font-size: 0.72rem; }
         }
 
         /* ===== READING PROGRESS BAR ===== */
@@ -1004,10 +1052,7 @@
         /* ============ DARK MODE OVERRIDES ============ */
         [data-theme="dark"] .rating-btn.active { background: var(--accent); border-color: var(--accent); }
 
-        @media (max-width: 768px) {
-            .calculator-grid { grid-template-columns: 1fr; }
-            .related-grid { grid-template-columns: 1fr; }
-        }
+
     </style>
 </head>
 <body>
