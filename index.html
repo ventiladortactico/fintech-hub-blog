@@ -1058,9 +1058,10 @@
         .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
 
         /* ============ CONTAIN BIDVERTISER ADS ============ */
-        [id^="ntv_"] { max-width: 100%; overflow: hidden; }
-        [id^="ntv_"] img { max-width: 100%; height: auto; }
-        [id^="ntv_"] table, [id^="ntv_"] div { max-width: 100%; }
+        [id^="ntv_"] { max-width: 100% !important; overflow: hidden !important; }
+        [id^="ntv_"] * { max-width: 100% !important; box-sizing: border-box !important; }
+        [id^="ntv_"] img { max-width: 100% !important; height: auto !important; }
+        [id^="ntv_"] table, [id^="ntv_"] div, [id^="ntv_"] a, [id^="ntv_"] span { max-width: 100% !important; }
 
         /* ============ DARK MODE OVERRIDES ============ */
         [data-theme="dark"] .rating-btn.active { background: var(--accent); border-color: var(--accent); }
@@ -1139,9 +1140,9 @@
                             bvwidgetid: "ntv_2105541_2",
                             bvlinksownid: 2105541,
                             rows: 1,
-                            cols: 2,
+                            cols: 1,
                             textpos: "below",
-                            imagewidth: 130,
+                            imagewidth: 250,
                             mobilecols: 1,
                             cb: (new Date()).getTime()
                         };
@@ -1188,9 +1189,9 @@
                             bvwidgetid: "ntv_2105541_3",
                             bvlinksownid: 2105541,
                             rows: 1,
-                            cols: 2,
+                            cols: 1,
                             textpos: "below",
-                            imagewidth: 130,
+                            imagewidth: 250,
                             mobilecols: 1,
                             cb: (new Date()).getTime()
                         };
@@ -1271,7 +1272,9 @@
             <div id="ntv_2105541_calc"></div>
             <script type="text/javascript">
             (function(d) {
-                var params = { bvwidgetid: "ntv_2105541_calc", bvlinksownid: 2105541, rows: 1, cols: 2, textpos: "below", imagewidth: 130, mobilecols: 1, cb: (new Date()).getTime() };
+                var params = { bvwidgetid: "ntv_2105541_calc", bvlinksownid: 2105541, rows: 1, cols: 1,
+                        textpos: "below",
+                        imagewidth: 250, mobilecols: 1, cb: (new Date()).getTime() };
                 params.bvwidgetid = "ntv_2105541_calc" + params.cb;
                 var el = d.getElementById("ntv_2105541_calc");
                 if (el) el.id = params.bvwidgetid;
@@ -1333,7 +1336,7 @@
             <div class="ad-container reveal" style="margin:0.5rem 0">
                 <div id="ntv_2105541_faq"></div>
                 <script>
-                (function(d){var p={bvwidgetid:"ntv_2105541_faq",bvlinksownid:2105541,rows:1,cols:2,textpos:"below",imagewidth:130,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_faq");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
+                (function(d){var p={bvwidgetid:"ntv_2105541_faq",bvlinksownid:2105541,rows:1,cols:1,textpos:"below",imagewidth:250,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_faq");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
                 </script>
                 <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
             </div>
@@ -1393,7 +1396,7 @@
             <div class="ad-container reveal" style="margin:1rem 0">
                 <div id="ntv_2105541_footer"></div>
                 <script>
-                (function(d){var p={bvwidgetid:"ntv_2105541_footer",bvlinksownid:2105541,rows:1,cols:2,textpos:"below",imagewidth:130,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_footer");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
+                (function(d){var p={bvwidgetid:"ntv_2105541_footer",bvlinksownid:2105541,rows:1,cols:1,textpos:"below",imagewidth:250,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_footer");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
                 </script>
                 <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
             </div>
@@ -1708,7 +1711,7 @@
             var adSlots = container.querySelectorAll('.article-ad-placeholder');
             for (var ai = 0; ai < adSlots.length; ai++) {
                 (function(el) {
-                    var params = { bvwidgetid: 'ntv_art_' + ai, bvlinksownid: 2105541, rows: 1, cols: 2, textpos: 'below', imagewidth: 130, mobilecols: 1, cb: Date.now() };
+                    var params = { bvwidgetid: 'ntv_art_' + ai, bvlinksownid: 2105541, rows: 1, cols: 1, textpos: 'below', imagewidth: 250, mobilecols: 1, cb: Date.now() };
                     params.bvwidgetid += '_' + params.cb;
                     el.id = params.bvwidgetid;
                     el.style.margin = '1rem 0';
