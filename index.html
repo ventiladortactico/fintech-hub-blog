@@ -182,21 +182,9 @@
 
         /* Ads Placeholder */
         .ad-container {
-            background: white;
-            padding: 1rem;
-            margin: 1.5rem 0;
-            border-radius: 8px;
             text-align: center;
-            min-height: 120px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: transform 0.3s;
-        }
-
-        .ad-container:hover {
-            transform: scale(1.01);
+            margin: 1rem 0;
+            min-height: 0;
         }
 
         /* Featured Section */
@@ -763,7 +751,6 @@
         [data-theme="dark"] .sidebar,
         [data-theme="dark"] .full-article,
         [data-theme="dark"] .contact-form,
-        [data-theme="dark"] .ad-container,
         [data-theme="dark"] .faq-item,
         [data-theme="dark"] .calculator-card {
             background: var(--card);
@@ -1065,7 +1052,7 @@
             <div style="text-align:center">
                 <SCRIPT data-cfasync="false" SRC="//bdv.bidvertiser.com/BidVertiser.dbm?pid=942700&bid=2105541" TYPE="text/javascript"></SCRIPT>
             </div>
-            <p style="color: #999; font-size: 0.8rem;">- Publicidad -</p>
+            <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
         </div>
 
         <!-- Content Wrapper with Sidebar -->
@@ -1107,7 +1094,7 @@
                         if (d.getElementById(params.bvwidgetid)) d.getElementById(params.bvwidgetid).appendChild(s);
                     })(document);
                     </script>
-                    <p style="color: #999; font-size: 0.8rem;">- Publicidad -</p>
+                    <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
                 </div>
             </section>
 
@@ -1131,7 +1118,7 @@
                 </div>
 
                 <!-- Ad Space 3 - BidVertiser Native -->
-                <div class="ad-container reveal" style="min-height: 400px;">
+                <div class="ad-container reveal">
                     <div id="ntv_2105541_3"></div>
                     <script type="text/javascript">
                     (function(d) {
@@ -1156,7 +1143,7 @@
                         if (d.getElementById(params.bvwidgetid)) d.getElementById(params.bvwidgetid).appendChild(s);
                     })(document);
                     </script>
-                    <p style="color: #999; font-size: 0.8rem;">- Publicidad -</p>
+                    <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
                 </div>
             </aside>
         </div>
@@ -1971,11 +1958,17 @@
 })(document);
 </script>
 
-<!-- Service Worker -->
+<!-- Service Worker + Push Permission -->
 <script>
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
 }
+function requestPush() {
+    if ('Notification' in window && Notification.permission === 'default') {
+        Notification.requestPermission();
+    }
+}
+document.addEventListener('click', requestPush, { once: true });
 </script>
 
 </body>
