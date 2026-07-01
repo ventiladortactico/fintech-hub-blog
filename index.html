@@ -956,6 +956,8 @@
         .rating-label { font-size: 0.85rem; color: var(--text-muted); margin-right: 0.3rem; }
 
         /* ============ AFFILIATE ============ */
+        .article-ad-placeholder { min-height: 0; }
+
         .affiliate-disclosure {
             font-size: 0.75rem;
             color: var(--text-muted);
@@ -1205,6 +1207,24 @@
             </div>
         </section>
 
+        <!-- Ad 4 - después de calculadora -->
+        <div class="ad-container reveal">
+            <div id="ntv_2105541_calc"></div>
+            <script type="text/javascript">
+            (function(d) {
+                var params = { bvwidgetid: "ntv_2105541_calc", bvlinksownid: 2105541, rows: 1, cols: 2, textpos: "below", imagewidth: 130, mobilecols: 1, cb: (new Date()).getTime() };
+                params.bvwidgetid = "ntv_2105541_calc" + params.cb;
+                var el = d.getElementById("ntv_2105541_calc");
+                if (el) el.id = params.bvwidgetid;
+                var qs = Object.keys(params).reduce(function(a, k){ a.push(k + '=' + encodeURIComponent(params[k])); return a},[]).join(String.fromCharCode(38));
+                var s = d.createElement('script'); s.type='text/javascript';s.async=true;
+                s.src = ('https:' == document.location.protocol ? 'https' : 'http') + "://cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?" + qs;
+                if (d.getElementById(params.bvwidgetid)) d.getElementById(params.bvwidgetid).appendChild(s);
+            })(document);
+            </script>
+            <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+        </div>
+
         <!-- FAQ Section -->
         <section class="faq-section reveal">
             <h2>❓ Preguntas Frecuentes sobre Finanzas</h2>
@@ -1248,6 +1268,15 @@
                 <div class="faq-answer">
                     <p>Las criptomonedas son <strong>activos de alto riesgo y alta volatilidad</strong>. En junio 2026, Bitcoin cayó un 18.8% en un solo mes, y Ethereum un 21.9%. Su máximo histórico (BTC $126.198 en oct 2025) dista mucho del precio actual ($59.152). Sin embargo, la capitalización total del mercado cripto es de <strong>$2.15 billones</strong> con más de 17.400 criptomonedas activas. La recomendación de expertos: destiná solo el <strong>5-10% de tu portafolio</strong> a cripto, invertí solo lo que estés dispuesto a perder, y priorizá Bitcoin y Ethereum sobre altcoins especulativas.</p>
                 </div>
+            </div>
+
+            <!-- Ad 5 - dentro del FAQ -->
+            <div class="ad-container reveal" style="margin:0.5rem 0">
+                <div id="ntv_2105541_faq"></div>
+                <script>
+                (function(d){var p={bvwidgetid:"ntv_2105541_faq",bvlinksownid:2105541,rows:1,cols:2,textpos:"below",imagewidth:130,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_faq");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
+                </script>
+                <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
             </div>
 
             <div class="faq-item">
@@ -1300,6 +1329,16 @@
         <div class="container">
             <h3>Plata Hoy</h3>
             <p>Tu fuente de información sobre finanzas, inversiones y tecnología</p>
+
+            <!-- Ad 6 - footer -->
+            <div class="ad-container reveal" style="margin:1rem 0">
+                <div id="ntv_2105541_footer"></div>
+                <script>
+                (function(d){var p={bvwidgetid:"ntv_2105541_footer",bvlinksownid:2105541,rows:1,cols:2,textpos:"below",imagewidth:130,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_footer");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
+                </script>
+                <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+            </div>
+
             <div class="footer-links">
                 <a href="#" onclick="event.preventDefault(); filterPosts('all')">Inicio</a>
                 <a href="#sobre-nosotros">Sobre Nosotros</a>
@@ -1574,7 +1613,8 @@
                 for (var k = 0; k < a.content.length; k++) {
                     html += '<p>' + a.content[k] + '</p>';
                 }
-                html += '<div class="article-actions">' +
+                html += '<div class="article-ad-placeholder" data-idx="' + a.id + '"></div>' +
+                    '<div class="article-actions">' +
                     '<div class="rating-group">' +
                     '<span class="rating-label">¿Te sirvió?</span>' +
                     '<button class="rating-btn" onclick="voteArticle(' + a.id + ',\'like\')" id="like-' + a.id + '">👍 <span class="count" id="like-count-' + a.id + '">0</span></button>' +
@@ -1605,6 +1645,22 @@
                 html += '</article>';
             }
             container.innerHTML = html;
+            // Initialize article ads
+            var adSlots = container.querySelectorAll('.article-ad-placeholder');
+            for (var ai = 0; ai < adSlots.length; ai++) {
+                (function(el) {
+                    var params = { bvwidgetid: 'ntv_art_' + ai, bvlinksownid: 2105541, rows: 1, cols: 2, textpos: 'below', imagewidth: 130, mobilecols: 1, cb: Date.now() };
+                    params.bvwidgetid += '_' + params.cb;
+                    el.id = params.bvwidgetid;
+                    el.style.margin = '1rem 0';
+                    el.style.textAlign = 'center';
+                    var qs = Object.keys(params).map(function(k){ return k + '=' + encodeURIComponent(params[k]); }).join('&');
+                    var s = document.createElement('script'); s.type = 'text/javascript'; s.async = true;
+                    s.src = ('https:' == location.protocol ? 'https:' : 'http:') + '//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?' + qs;
+                    var t = document.getElementById(params.bvwidgetid);
+                    if (t) t.appendChild(s);
+                })(adSlots[ai]);
+            }
         }
 
         // ============ FILTERS ============
