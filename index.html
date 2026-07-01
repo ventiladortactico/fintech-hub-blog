@@ -1107,7 +1107,7 @@
                     <a href="#" data-filter="tecnologia" onclick="event.preventDefault(); filterPosts('tecnologia')">Tecnología</a>
                     <a href="#" data-filter="cripto" onclick="event.preventDefault(); filterPosts('cripto')">Cripto</a>
                     <a href="#" data-filter="contacto" onclick="event.preventDefault(); filterPosts('contacto')">Contacto</a>
-                    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Modo oscuro">🌙</button>
+                    <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn" title="Cambiar modo oscuro/claro" aria-label="Cambiar modo oscuro/claro">🌙</button>
                 </nav>
             </div>
         </div>
@@ -1314,7 +1314,7 @@
             <p style="margin-bottom: 1.5rem; color: #666;">Respuestas basadas en datos reales del mercado financiero latinoamericano.</p>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Cuánto debería ahorrar de mi sueldo cada mes?
                     <span class="arrow">▼</span>
                 </button>
@@ -1324,7 +1324,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Es mejor ahorrar o invertir?
                     <span class="arrow">▼</span>
                 </button>
@@ -1334,7 +1334,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Cuánto dinero necesito para empezar a invertir?
                     <span class="arrow">▼</span>
                 </button>
@@ -1344,7 +1344,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Las criptomonedas son una inversión segura?
                     <span class="arrow">▼</span>
                 </button>
@@ -1363,7 +1363,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Cuál es la mejor tarjeta de crédito?
                     <span class="arrow">▼</span>
                 </button>
@@ -1373,7 +1373,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Cómo afecta la inflación a mis ahorros?
                     <span class="arrow">▼</span>
                 </button>
@@ -1383,7 +1383,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Qué son los ETFs y por qué son recomendados para principiantes?
                     <span class="arrow">▼</span>
                 </button>
@@ -1393,7 +1393,7 @@
             </div>
 
             <div class="faq-item">
-                <button class="faq-question" onclick="toggleFAQ(this)">
+                <button class="faq-question" onclick="toggleFAQ(this)" aria-expanded="false">
                     ¿Cuánto necesito para jubilarme cómodamente?
                     <span class="arrow">▼</span>
                 </button>
@@ -1405,7 +1405,7 @@
     </main>
 
     <!-- Scroll to Top -->
-    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})">↑</button>
+    <button class="scroll-top" id="scrollTop" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" aria-label="Volver arriba">↑</button>
 
     <!-- Footer -->
     <footer>
@@ -1931,11 +1931,13 @@
             for (var i = 0; i < allAnswers.length; i++) {
                 allAnswers[i].classList.remove('open');
                 allBtns[i].classList.remove('open');
+                allBtns[i].setAttribute('aria-expanded', 'false');
             }
             // Toggle current
             if (!isOpen) {
                 answer.classList.add('open');
                 btn.classList.add('open');
+                btn.setAttribute('aria-expanded', 'true');
             }
         }
 
