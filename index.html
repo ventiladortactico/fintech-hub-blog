@@ -211,7 +211,7 @@
         }
 
         .featured h2 {
-            color: #667eea;
+            color: #5568d3;
             margin-bottom: 0.8rem;
             font-size: 1.5rem;
         }
@@ -407,8 +407,8 @@
             transform: translateY(-2px);
         }
 
-        .share-btn.facebook { background: #1877f2; }
-        .share-btn.twitter { background: #1da1f2; }
+        .share-btn.facebook { background: #166fe0; }
+        .share-btn.twitter { background: #1a91da; }
         .share-btn.whatsapp { background: #25d366; }
         .share-btn.linkedin { background: #0a66c2; }
 
@@ -1131,7 +1131,7 @@
             <div style="text-align:center">
                 <SCRIPT data-cfasync="false" SRC="//bdv.bidvertiser.com/BidVertiser.dbm?pid=942700&bid=2105541" TYPE="text/javascript"></SCRIPT>
             </div>
-            <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+            <p style="color: #999; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
         </div>
 
         <!-- Content Wrapper with Sidebar -->
@@ -1173,7 +1173,7 @@
                         if (d.getElementById(params.bvwidgetid)) d.getElementById(params.bvwidgetid).appendChild(s);
                     })(document);
                     </script>
-                    <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+                    <p style="color: #999; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
                 </div>
             </section>
 
@@ -1222,7 +1222,7 @@
                         if (d.getElementById(params.bvwidgetid)) d.getElementById(params.bvwidgetid).appendChild(s);
                     })(document);
                     </script>
-                    <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+                    <p style="color: #999; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
                 </div>
             </aside>
         </div>
@@ -1264,13 +1264,13 @@
             <div class="calculator-grid">
                 <div class="calculator-card">
                     <h3>📊 Parámetros</h3>
-                    <label>Monto inicial ($)</label>
+                    <label for="calc-initial">Monto inicial ($)</label>
                     <input class="calculator-input" id="calc-initial" type="number" value="1000" min="0" oninput="calcInterest()">
-                    <label>Aporte mensual ($)</label>
+                    <label for="calc-monthly">Aporte mensual ($)</label>
                     <input class="calculator-input" id="calc-monthly" type="number" value="200" min="0" oninput="calcInterest()">
-                    <label>Tasa de interés anual (%)</label>
+                    <label for="calc-rate">Tasa de interés anual (%)</label>
                     <input class="calculator-input" id="calc-rate" type="number" value="10" min="0" step="0.1" oninput="calcInterest()">
-                    <label>Años de inversión</label>
+                    <label for="calc-years">Años de inversión</label>
                     <input class="calculator-input" id="calc-years" type="number" value="10" min="1" max="50" oninput="calcInterest()">
                 </div>
                 <div class="calculator-card">
@@ -1305,7 +1305,7 @@
                 if (d.getElementById(params.bvwidgetid)) d.getElementById(params.bvwidgetid).appendChild(s);
             })(document);
             </script>
-            <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+            <p style="color: #999; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
         </div>
 
         <!-- FAQ Section -->
@@ -1359,7 +1359,7 @@
                 <script>
                 (function(d){var p={bvwidgetid:"ntv_2105541_faq",bvlinksownid:2105541,rows:1,cols:1,textpos:"below",imagewidth:250,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_faq");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
                 </script>
-                <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+                <p style="color: #999; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
             </div>
 
             <div class="faq-item">
@@ -1419,7 +1419,7 @@
                 <script>
                 (function(d){var p={bvwidgetid:"ntv_2105541_footer",bvlinksownid:2105541,rows:1,cols:1,textpos:"below",imagewidth:250,mobilecols:1,cb:Date.now()};p.bvwidgetid+="f"+p.cb;var e=d.getElementById("ntv_2105541_footer");if(e)e.id=p.bvwidgetid;var q=Object.keys(p).map(function(k){return k+"="+encodeURIComponent(p[k])}).join("&");var s=d.createElement("script");s.type="text/javascript";s.async=true;s.src=("https:"==location.protocol?"https:":"http:")+"//cdn.hyperpromote.com/bidvertiser/tags/active/bdvws.js?"+q;var t=d.getElementById(p.bvwidgetid);if(t)t.appendChild(s)})(document);
                 </script>
-                <p style="color: #ccc; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
+                <p style="color: #999; font-size: 0.6rem; margin-top: 2px;">- Publicidad -</p>
             </div>
 
             <div class="footer-links">
@@ -2100,6 +2100,8 @@
 </script>
 
 <!-- Service Worker + Push Permission -->
+<!-- Comentado para evitar error 404 en producción -->
+<!--
 <script>
 if ('serviceWorker' in navigator) {
     navigator.serviceWorker.register('/sw.js');
@@ -2111,6 +2113,7 @@ function requestPush() {
 }
 document.addEventListener('click', requestPush, { once: true });
 </script>
+-->
 
 </body>
 </html>
