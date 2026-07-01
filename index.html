@@ -933,6 +933,86 @@
             font-size: 0.88rem;
         }
 
+        /* ============ RATINGS ============ */
+        .article-actions {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-top: 1px solid var(--border);
+            margin: 1.5rem 0 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        .rating-group {
+            display: flex;
+            gap: 0.4rem;
+            align-items: center;
+        }
+        .rating-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.82rem;
+            transition: all 0.2s;
+            user-select: none;
+        }
+        .rating-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .rating-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+        .rating-btn .count { font-size: 0.7rem; opacity: 0.7; margin-left: 0.1rem; }
+        .rating-label { font-size: 0.85rem; color: var(--text-muted); margin-right: 0.3rem; }
+
+        /* ============ AFFILIATE ============ */
+        .affiliate-disclosure {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            padding: 0.5rem 0;
+            margin-top: 0.5rem;
+            border-top: 1px dashed var(--border);
+            line-height: 1.4;
+        }
+        .affiliate-disclosure a { color: var(--accent); }
+        .affiliate-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.2rem;
+        }
+        .affiliate-badge {
+            font-size: 0.6rem;
+            background: #f59e0b;
+            color: #fff;
+            padding: 0.05rem 0.35rem;
+            border-radius: 3px;
+            vertical-align: middle;
+            margin-left: 0.2rem;
+            font-weight: 600;
+        }
+
+        /* ============ COPY BUTTON ============ */
+        .copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            padding: 0.35rem 1rem;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card);
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 0.82rem;
+            transition: all 0.2s;
+        }
+        .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
+        .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+
+        /* ============ DARK MODE OVERRIDES ============ */
+        [data-theme="dark"] .rating-btn.active { background: var(--accent); border-color: var(--accent); }
+
         @media (max-width: 768px) {
             .calculator-grid { grid-template-columns: 1fr; }
             .related-grid { grid-template-columns: 1fr; }
@@ -971,11 +1051,11 @@
         <!-- Featured Article -->
         <section class="featured reveal" id="featured-section">
             <h2>📈 ¿Cómo empezar a invertir con poco dinero?</h2>
-            <p>Invertir no es solo para ricos. Con montos desde <strong>$50 USD</strong> ya podés empezar a construir tu futuro financiero. El mercado de herramientas de finanzas personales alcanzó los <strong>$8.423 millones USD en 2024</strong> y crece al 5.81% anual, lo que refleja el interés masivo por tomar el control de las finanzas personales. En esta guía te mostramos los primeros pasos para convertirte en inversor sin necesidad de grandes capitales.</p>
-            <p><strong>1. Fondo de emergencia primero:</strong> Antes de invertir, asegurate de tener 3 a 6 meses de gastos en una cuenta de ahorro de alta liquidez. En Latinoamérica, la inflación promedio del 4-6% anual hace urgente que tu dinero no pierda valor durmiendo en el banco.</p>
+            <p>Invertir no es solo para ricos. Con montos desde <strong>$50 USD</strong> ya podés empezar a construir tu futuro financiero. El mercado global FinTech alcanzó los <strong>$460.76 mil millones USD en 2026</strong> y crece al 18.2% anual (Fortune Business Insights), lo que refleja el interés masivo por tomar el control de las finanzas personales. En esta guía te mostramos los primeros pasos para convertirte en inversor sin necesidad de grandes capitales.</p>
+            <p><strong>1. Fondo de emergencia primero:</strong> Antes de invertir, asegurate de tener 3 a 6 meses de gastos en una cuenta de ahorro de alta liquidez. En Latinoamérica, la inflación se estima en <strong>3.7% para 2026</strong> (JP Morgan), muy por debajo de años anteriores, pero sigue erosionando el poder adquisitivo si tu dinero está dormido.</p>
             <p><strong>2. Microinversiones:</strong> Apps como Binance (desde $10 USD), Fidelity (desde $1 USD en fracciones) y roboadvisors como Betterment te permiten empezar con montos irrelevantes. Lo importante es el hábito, no la cantidad inicial.</p>
             <p><strong>3. ETFs y fondos indexados:</strong> Con un ETF del S&P 500 ($SPY) estás comprando las 500 empresas más grandes de EEUU en una sola operación. Históricamente ha rendido ~10% anual promedio. Es la puerta de entrada ideal para principiantes.</p>
-            <p><em>Según la ENIF 2024 en México, el 63% de la población ya tiene una cuenta de ahorro formal. El siguiente paso es invertir.</em></p>
+            <p><em>En México, el 63% de la población ya tiene una cuenta de ahorro formal (ENIF). El siguiente paso es invertir.</em></p>
             <button class="btn" onclick="scrollToArticles()">Ver más artículos ↓</button>
         </section>
 
@@ -1066,7 +1146,7 @@
         <section class="featured reveal" id="sobre-nosotros">
             <h2>📖 Sobre FinTech Hub</h2>
             <p>FinTech Hub nació con la misión de democratizar la educación financiera. Creemos que todos merecen acceso a información clara, práctica y sin jargon innecesario sobre finanzas personales, inversiones, criptomonedas y tecnología financiera.</p>
-            <p>Según la <strong>Encuesta Nacional de Inclusión Financiera 2024 (ENIF)</strong>, cerca de 8 de cada 10 personas en México ya cuentan con al menos un producto financiero formal, el nivel más alto desde 2015. Sin embargo, <strong>2 de cada 3 colombianos no ahorran</strong> (Superintendencia Financiera, 2025). Nuestro objetivo es cerrar esa brecha con contenido educativo de calidad.</p>
+            <p>Según la <strong>Encuesta Nacional de Inclusión Financiera (ENIF)</strong>, cerca de 8 de cada 10 personas en México ya cuentan con al menos un producto financiero formal. Sin embargo, <strong>2 de cada 3 colombianos no ahorran</strong>. Mientras tanto, el mercado FinTech global crece al 18.2% anual y alcanzó los $460.76 mil millones en 2026. Nuestro objetivo es cerrar esa brecha con contenido educativo de calidad.</p>
             <p>Publicamos contenido nuevo cada semana. Seguinos en redes sociales para estar al día.</p>
         </section>
 
@@ -1112,7 +1192,7 @@
                     <span class="arrow">▼</span>
                 </button>
                 <div class="faq-answer">
-                    <p>La regla <strong>50/30/20</strong> es el estándar recomendado por economistas: 50% para necesidades, 30% para deseos y 20% para ahorro e inversión. Sin embargo, según la <strong>Superintendencia Financiera de Colombia (2025)</strong>, 2 de cada 3 colombianos no ahorran. En México, la <strong>ENIF 2024</strong> reveló que el 63% tiene una cuenta de ahorro, pero solo el 20% sigue un presupuesto estructurado. Si no podés llegar al 20%, empezá con un 5% o 10% y aumentá progresivamente. Lo importante es el hábito.</p>
+                    <p>La regla <strong>50/30/20</strong> es el estándar recomendado por economistas: 50% para necesidades, 30% para deseos y 20% para ahorro e inversión. Sin embargo, en la práctica, 2 de cada 3 colombianos no ahorran. En México, la <strong>ENIF</strong> reveló que el 63% tiene una cuenta de ahorro, pero solo el 20% sigue un presupuesto estructurado. Si no podés llegar al 20%, empezá con un 5% o 10% y aumentá progresivamente. Lo importante es el hábito.</p>
                 </div>
             </div>
 
@@ -1132,7 +1212,7 @@
                     <span class="arrow">▼</span>
                 </button>
                 <div class="faq-answer">
-                    <p>Mucho menos de lo que creés. Hoy podés empezar con montos muy accesibles: <strong>desde $1 USD</strong> en acciones fraccionadas con Fidelity o Vanguard, <strong>desde $10 USD</strong> en criptomonedas en Binance, y <strong>desde $50 USD</strong> en ETFs tradicionales. El mercado de herramientas de finanzas personales alcanzó los <strong>$8.423 millones USD en 2024</strong> (creciendo al 5.81% anual), lo que demuestra que cada vez más personas están invirtiendo. No importa el monto inicial, importa la consistencia.</p>
+                    <p>Mucho menos de lo que creés. Hoy podés empezar con montos muy accesibles: <strong>desde $1 USD</strong> en acciones fraccionadas con Fidelity o Vanguard, <strong>desde $10 USD</strong> en criptomonedas en Binance, y <strong>desde $50 USD</strong> en ETFs tradicionales. El mercado global FinTech alcanzó los <strong>$460.76 mil millones USD en 2026</strong> (Fortune Business Insights, creciendo al 18.2% anual), lo que demuestra que cada vez más personas están invirtiendo. No importa el monto inicial, importa la consistencia.</p>
                 </div>
             </div>
 
@@ -1142,7 +1222,7 @@
                     <span class="arrow">▼</span>
                 </button>
                 <div class="faq-answer">
-                    <p>Las criptomonedas son <strong>activos de alto riesgo y alta volatilidad</strong>. En junio 2026, Bitcoin cayó un 18.8% en un solo mes, y Ethereum un 21.9%. Su máximo histórico (BTC $126.198 en oct 2025) dista mucho del precio actual ($60.365). Sin embargo, la capitalización total del mercado cripto es de <strong>$2.08 billones</strong> con más de 38.070 criptomonedas. La recomendación de expertos: destiná solo el <strong>5-10% de tu portafolio</strong> a cripto, invertí solo lo que estés dispuesto a perder, y priorizá Bitcoin y Ethereum sobre altcoins especulativas.</p>
+                    <p>Las criptomonedas son <strong>activos de alto riesgo y alta volatilidad</strong>. En junio 2026, Bitcoin cayó un 18.8% en un solo mes, y Ethereum un 21.9%. Su máximo histórico (BTC $126.198 en oct 2025) dista mucho del precio actual ($59.152). Sin embargo, la capitalización total del mercado cripto es de <strong>$2.15 billones</strong> con más de 17.400 criptomonedas activas. La recomendación de expertos: destiná solo el <strong>5-10% de tu portafolio</strong> a cripto, invertí solo lo que estés dispuesto a perder, y priorizá Bitcoin y Ethereum sobre altcoins especulativas.</p>
                 </div>
             </div>
 
@@ -1162,7 +1242,7 @@
                     <span class="arrow">▼</span>
                 </button>
                 <div class="faq-answer">
-                    <p>La inflación es el enemigo silencioso del ahorro. Según el <strong>FMI (abril 2026)</strong>, la inflación en Latinoamérica (excluyendo Argentina y Venezuela) se proyecta en <strong>3.5% para 2026</strong>. Si tu cuenta de ahorro rinde 2% pero la inflación es 3.5%, estás <strong>perdiendo 1.5% de poder adquisitivo por año</strong>. Por eso es clave no dejar todo en efectivo o cuentas de bajo rendimiento. Combiná cuentas de ahorro de alta liquidez (para emergencias) con inversiones en instrumentos que superen la inflación, como ETFs, CETES (México ~9.5% en 2024) o bonos ajustables por inflación.</p>
+                    <p>La inflación es el enemigo silencioso del ahorro. Según el <strong>JP Morgan (2026)</strong>, la inflación en Latinoamérica se estima en <strong>3.7% para 2026</strong>. Si tu cuenta de ahorro rinde 2% pero la inflación es 3.7%, estás <strong>perdiendo 1.7% de poder adquisitivo por año</strong>. Por eso es clave no dejar todo en efectivo o cuentas de bajo rendimiento. Combiná cuentas de ahorro de alta liquidez (para emergencias) con inversiones en instrumentos que superen la inflación, como ETFs, CETES o bonos ajustables por inflación.</p>
                 </div>
             </div>
 
@@ -1224,11 +1304,11 @@
                 readTime: '7 min',
                 tags: ['Presupuesto', 'Ahorro', 'Finanzas'],
                 content: [
-                    'Crear un presupuesto es el primer paso hacia la libertad financiera. Según estudios de mercado, el 60% de los consumidores expresan el deseo de contar con herramientas que faciliten el seguimiento de gastos e ingresos. El mercado de herramientas de finanzas personales está valuado en $8.423 millones USD (2024) y crece al 5.81% anual.',
+                    'Crear un presupuesto es el primer paso hacia la libertad financiera. Según Fortune Business Insights (2026), el 78% de los consumidores usa pagos digitales regularmente y el mercado global FinTech alcanzó $460.76 mil millones USD, creciendo al 18.2% anual. La digitalización financiera avanza más rápido que nunca.',
                     '<strong>Paso 1: Conocé tus ingresos reales.</strong> Sumá todas tus fuentes de ingreso después de impuestos. No incluyas aguinaldos o bonos que no sean regulares.',
                     '<strong>Paso 2: Registrá cada gasto durante 30 días.</strong> Usá apps como YNAB, Fintonic o simplemente Excel. Los gastos hormiga (café, snacks, suscripciones) suelen representar entre el 15-20% del presupuesto sin que lo notes.',
-                    '<strong>Paso 3: Aplicá la regla 50/30/20.</strong> Destiná el 50% a necesidades (alquiler, comida, servicios), 30% a deseos (ocio, viajes) y 20% a ahorro e inversión. Ajustá los porcentajes según tus metas.',
-                    '<strong>Dato clave:</strong> En México, el 63% de la población tiene una cuenta de ahorro formal (ENIF 2024), pero solo el 20% sigue un presupuesto estructurado. La diferencia entre tener cuenta y usarla inteligentemente es la educación financiera.'
+                    '<strong>Paso 3: Aplicá la regla 50/30/20.</strong> Destiná el 50% a necesidades (alquiler, comida, servicios), 30% a deseos (ocio, viajes) y 20% a ahorro e inversión. Para invertir ese 20%, plataformas como <a href="https://etoro.tw/REPLACE_AFFILIATE_ID" class="affiliate-link" target="_blank" rel="nofollow sponsored">eToro</a> o <a href="https://www.binance.com/es/referral/CPA_00ROPQDPX6" class="affiliate-link" target="_blank" rel="nofollow sponsored">Binance <span class="affiliate-badge">Afiliado</span></a> te permiten empezar con montos pequeños y diversificar.',
+                    '<strong>Dato clave:</strong> En México, el 63% de la población tiene una cuenta de ahorro formal (ENIF), pero solo el 20% sigue un presupuesto estructurado. El mercado global FinTech alcanzó $460.76 mil millones en 2026, creciendo al 18.2% anual. La diferencia entre tener cuenta y usarla inteligentemente es la educación financiera.'
                 ]
             },
             {
@@ -1243,11 +1323,12 @@
                 tags: ['FinTech', 'Apps', 'Tecnología'],
                 content: [
                     'El ecosistema FinTech sigue expandiéndose a pasos agigantados. Más del 50% de los usuarios prefieren herramientas que ofrecen un conjunto integral de servicios financieros: presupuestos, inversiones y ahorros todo en uno.',
-                    '<strong>Revolut:</strong> Ideal para viajeros y nómadas digitales. Ofrece cambio de divisas sin comisiones, acciones fraccionadas, cripto y seguros. Más de 40 millones de usuarios la usan globalmente.',
+                    '<strong>Revolut:</strong> Ideal para viajeros y nómadas digitales. Ofrece cambio de divisas sin comisiones, acciones fraccionadas, cripto y seguros. Es una de las neobanks más usadas globalmente.',
                     '<strong>N26:</strong> Este neobanco alemán destaca por sus "Espacios" para apartar dinero automáticamente hacia metas específicas. Perfecto para quienes quieren ahorrar sin pensarlo.',
                     '<strong>YNAB (You Need A Budget):</strong> La app de presupuestos más potente del mercado. Su metodología de "darle un trabajo a cada dólar" ha ayudado a miles a salir de deudas. Ofrece 34 días de prueba gratuita.',
                     '<strong>Fidelity / Vanguard:</strong> Para inversores tradicionales, ofrecen ETFs y fondos indexados con comisiones cercanas a cero. Podés empezar a invertir desde $1 USD con acciones fraccionadas.',
-                    '<strong>Binance:</strong> El exchange más grande del mundo permite desde trading simple hasta staking con rendimientos del 3-12% anual en cripto. Su programa "Learn & Earn" paga en cripto por aprender.'
+                    '<strong>Binance:</strong> El exchange más grande del mundo permite desde trading simple hasta staking con rendimientos del 3-12% anual en cripto. Su programa "Learn & Earn" paga en cripto por aprender. <a href="https://www.binance.com/es/referral/CPA_00ROPQDPX6" class="affiliate-link" target="_blank" rel="nofollow sponsored">Crear cuenta gratis <span class="affiliate-badge">Afiliado</span></a>',
+                    '<strong>eToro:</strong> Plataforma social de inversión donde podés comprar acciones, ETFs y cripto, o copiar automáticamente a traders exitosos. Ideal para principiantes que quieren aprender mientras invierten. <a href="https://etoro.tw/REPLACE_AFFILIATE_ID" class="affiliate-link" target="_blank" rel="nofollow sponsored">Crear cuenta gratis <span class="affiliate-badge">Afiliado</span></a>'
                 ]
             },
             {
@@ -1256,16 +1337,16 @@
                 categoryLabel: 'Criptomonedas',
                 emoji: '₿',
                 title: 'Bitcoin vs Ethereum: Comparativa completa 2026',
-                summary: 'BTC a $60.365 y ETH a $1.583 (junio 2026). Sus máximos históricos fueron $126.198 y $4.954 respectivamente. ¿Cuál elegir?',
+                summary: 'BTC a $59.152 y ETH a $1.565 (30 jun 2026). Sus máximos históricos fueron $126.198 y $4.954 respectivamente. ¿Cuál elegir?',
                 date: '25 Jun 2026',
                 readTime: '9 min',
                 tags: ['Bitcoin', 'Ethereum', 'Cripto'],
                 content: [
-                    'Bitcoin y Ethereum son las dos criptomonedas más importantes del mercado, pero cumplen funciones radicalmente distintas. Con BTC en <strong>$60.365</strong> y ETH en <strong>$1.583</strong> (26 de junio de 2026), entender sus diferencias es clave para decidir.',
-                    '<strong>Bitcoin (BTC) - El oro digital:</strong> Creado en 2009 como reserva de valor. Su oferta está limitada a 21 millones de monedas, lo que lo hace deflacionario. Su máximo histórico fue <strong>$126.198</strong> (octubre 2025). Es ideal para protección contra inflación y tiene una dominancia de mercado del 58.13%.',
+                    'Bitcoin y Ethereum son las dos criptomonedas más importantes del mercado, pero cumplen funciones radicalmente distintas. Con BTC en <strong>$59.152</strong> y ETH en <strong>$1.565</strong> (30 de junio de 2026), entender sus diferencias es clave para decidir.',
+                    '<strong>Bitcoin (BTC) - El oro digital:</strong> Creado en 2009 como reserva de valor. Su oferta está limitada a 21 millones de monedas, lo que lo hace deflacionario. Su máximo histórico fue <strong>$126.198</strong> (octubre 2025). Es ideal para protección contra inflación y tiene una dominancia de mercado del 55.7%.',
                     '<strong>Ethereum (ETH) - La computadora mundial:</strong> Más que una cripto, es una plataforma para contratos inteligentes y dApps. Con la transición a Proof of Stake en 2022, redujo su consumo energético en un 99.9%. Su máximo histórico fue <strong>$4.954</strong> (agosto 2025). Ofrece rendimientos por staking (~3-5% anual).',
-                    '<strong>¿Cuál conviene?</strong> Si buscás un activo de refugio a largo plazo con menor riesgo, Bitcoin es tu mejor opción. Si preferís exposición al ecosistema DeFi y más potencial de crecimiento (con mayor volatilidad), Ethereum ofrece más versatilidad.',
-                    '<strong>Dato:</strong> En junio 2026, BTC cayó 18.8% en el mes y ETH 21.9%, afectados por datos de inflación en EEUU (PCE en máximos de 3 años). Las criptos actúan como activos de "de-risking" líquidos en contextos macro adversos.'
+                    '<strong>¿Cuál conviene?</strong> Si buscás un activo de refugio a largo plazo con menor riesgo, Bitcoin es tu mejor opción. Si preferís exposición al ecosistema DeFi y más potencial de crecimiento (con mayor volatilidad), Ethereum ofrece más versatilidad. Podés comprar ambos en <a href="https://www.binance.com/es/referral/CPA_00ROPQDPX6" class="affiliate-link" target="_blank" rel="nofollow sponsored">Binance <span class="affiliate-badge">Afiliado</span></a> o en <a href="https://etoro.tw/REPLACE_AFFILIATE_ID" class="affiliate-link" target="_blank" rel="nofollow sponsored">eToro <span class="affiliate-badge">Afiliado</span></a>.',
+                    '<strong>Dato:</strong> El mercado cripto total es de $2.15 billones (junio 2026) con BTC dominando al 55.7%. Hay más de 17.400 criptomonedas activas en 1.487 exchanges. BTC cayó 18.8% en el mes y ETH 21.9%, afectados por la inflación en EEUU y la guerra en Medio Oriente. Las criptos actúan como activos de "de-risking" líquidos en contextos macro adversos.'
                 ]
             },
             {
@@ -1299,7 +1380,7 @@
                 content: [
                     'La inteligencia artificial está redefiniendo cada aspecto del sector financiero. Desde la detección de fraudes en milisegundos hasta asesores robóticos que gestionan portafolios, la IA democratiza servicios que antes eran exclusivos de grandes instituciones.',
                     '<strong>Detección de fraude:</strong> Los algoritmos de ML analizan patrones de transacciones en tiempo real. Si tu banco te alerta de una compra sospechosa antes de que la autorices, es IA trabajando. Según McKinsey, la IA reduce los falsos positivos en fraude hasta un 50%.',
-                    '<strong>Robo-advisors:</strong> Plataformas como Betterment, Wealthfront y Ellevest usan algoritmos para crear portafolios personalizados con comisiones del 0.25% anual, frente al 1-2% de asesores humanos. Gestionan más de $500 mil millones combinados.',
+                    '<strong>Robo-advisors:</strong> Plataformas como Betterment, Wealthfront y Ellevest usan algoritmos para crear portafolios personalizados con comisiones del 0.25% anual, frente al 1-2% de asesores humanos. <a href="https://etoro.tw/REPLACE_AFFILIATE_ID" class="affiliate-link" target="_blank" rel="nofollow sponsored">eToro <span class="affiliate-badge">Afiliado</span></a> también ofrece CopyTrader, una función única que te permite copiar automáticamente las estrategias de los inversores más rentables. Gestionan más de $1 billón combinados, según estimaciones de 2026.',
                     '<strong>Análisis predictivo:</strong> Fondos de cobertura usan modelos de lenguaje natural para analizar noticias, redes sociales y reportes financieros, prediciendo movimientos de mercado con precisión creciente.',
                     '<strong>Chatbots financieros:</strong> Atención al cliente 24/7, procesamiento de solicitudes y hasta consejos financieros básicos. Los asistentes virtuales ya resuelven el 80% de las consultas sin intervención humana.',
                     '<strong>El futuro:</strong> La computación cuántica promete revolucionar el modelado de riesgos y la optimización de portafolios. Empresas como IBM y Google ya colaboran con bancos en casos de uso piloto.'
@@ -1317,11 +1398,11 @@
                 tags: ['Bitcoin', 'Seguridad', 'Cripto'],
                 content: [
                     'Comprar Bitcoin por primera vez puede ser intimidante. Entre exchanges, wallets, keys y estafas, hay mucho por conocer antes de dar el paso. Esta guía te lleva de la mano.',
-                    '<strong>1. Elegí un exchange confiable:</strong> Para empezar, usá plataformas reguladas como Binance, Kraken o Coinbase. Verificá que tengan licencias en tu país. Nunca compres cripto en WhatsApp o Telegram, son estafas.',
+                    '<strong>1. Elegí un exchange confiable:</strong> Para empezar, usá plataformas reguladas como <a href="https://www.binance.com/es/referral/CPA_00ROPQDPX6" class="affiliate-link" target="_blank" rel="nofollow sponsored">Binance <span class="affiliate-badge">Afiliado</span></a>, <a href="https://etoro.tw/REPLACE_AFFILIATE_ID" class="affiliate-link" target="_blank" rel="nofollow sponsored">eToro <span class="affiliate-badge">Afiliado</span></a>, Kraken o Coinbase. Verificá que tengan licencias en tu país. Nunca compres cripto en WhatsApp o Telegram, son estafas.',
                     '<strong>2. Activá seguridad máxima:</strong> Autenticación de dos factores (2FA) con app tipo Google Authenticator o Authy. Nunca uses SMS como único 2FA (es vulnerable a SIM swapping).',
-                    '<strong>3. Comprá en el exchange:</strong> Vinculá una cuenta bancaria o tarjeta. Comprá montos pequeños al principio. El mínimo en Binance es ~$10 USD. Hay aproximadamente 38.070 criptomonedas en el mercado, empezá solo con BTC.',
+                    '<strong>3. Comprá en el exchange:</strong> Vinculá una cuenta bancaria o tarjeta. Comprá montos pequeños al principio. El mínimo en Binance es ~$10 USD. Hay aproximadamente 17.400 criptomonedas activas en el mercado, empezá solo con BTC.',
                     '<strong>4. Retirá a tu wallet:</strong> Dejá tus cripto en el exchange solo si vas a tradear. Para holdear a largo plazo, usá una cold wallet como Ledger o Trezor. Recordá: "Not your keys, not your coins."',
-                    '<strong>5. Seguí aprendiendo:</strong> El mercado cripto tiene una capitalización total de $2.08 billones (junio 2026). La educación es tu mejor inversión. Leé whitepapers, seguí fuentes confiables y nunca invirtás más de lo que estés dispuesto a perder.'
+                    '<strong>5. Seguí aprendiendo:</strong> El mercado cripto tiene una capitalización total de $2.15 billones (junio 2026). La educación es tu mejor inversión. Leé whitepapers, seguí fuentes confiables y nunca invirtás más de lo que estés dispuesto a perder.'
                 ]
             },
             {
@@ -1335,11 +1416,11 @@
                 readTime: '7 min',
                 tags: ['Emprendimiento', 'Negocios', 'Inversión'],
                 content: [
-                    'Emprender es una de las formas más poderosas de generar riqueza, pero también una de las más riesgosas. Según el Global Entrepreneurship Monitor (GEM 2025), el 40% de los nuevos negocios fracasan por falta de capital inicial.',
+                    'Emprender es una de las formas más poderosas de generar riqueza, pero también una de las más riesgosas. Según el Global Entrepreneurship Monitor (GEM 2025/2026), la actividad emprendedora global está en niveles récord, pero el 40% de los nuevos negocios fracasan por falta de capital inicial.',
                     '<strong>1. El mito de la "idea millonaria":</strong> No se trata de tener la idea más innovadora, sino de ejecutar bien. El 80% del éxito emprendedor depende de la ejecución, no de la idea.',
                     '<strong>2. Bootstrapping vs. inversores:</strong> Financiar tu negocio con recursos propios te da control total, pero limita velocidad. Los inversores ángeles aportan capital y contactos, pero exigen participación accionaria. Evaluá cuál es mejor según tu etapa.',
                     '<strong>3. El Lean Startup:</strong> Metodología de Eric Ries: construí un Producto Mínimo Viable (MVP), medí resultados, aprendé y pivotá si es necesario. Así reducís el riesgo de fracaso.',
-                    '<strong>4. Financiamiento alternativo:</strong> Crowdfunding, fintech lending y fondos de capital de riesgo son opciones reales. En LATAM, el crowdfunding creció 35% en 2025 (Fintech Americas).',
+                    '<strong>4. Financiamiento alternativo:</strong> Crowdfunding, fintech lending y fondos de capital de riesgo son opciones reales. En LATAM, el crowdfunding sigue expandiéndose como fuente clave de financiamiento para startups.',
                     '<strong>5. Educación financiera para emprendedores:</strong> Llevá tus cuentas claras: separá gastos personales de empresariales, conocé tu flujo de caja y armá un fondo de emergencia de 6 meses antes de emprender.'
                 ]
             },
@@ -1373,8 +1454,8 @@
                 readTime: '9 min',
                 tags: ['Educación', 'Principiantes', 'Ahorro'],
                 content: [
-                    'La educación financiera es la base para tomar decisiones informadas. Según la ENIF 2024, solo el 48% de los mexicanos ahorra formalmente. Acá empezamos desde lo más básico.',
-                    '<strong>1. Presupuesto: la herramienta más poderosa:</strong> La regla 50/30/20: 50% para necesidades, 30% para deseos, 20% para ahorro e inversión. Ajustá los porcentajes según tu realidad, pero mantené la disciplina.',
+                    'La educación financiera es la base para tomar decisiones informadas. En México, solo el 48% de las personas ahorra formalmente (ENIF). Acá empezamos desde lo más básico.',
+                    '<strong>1. Presupuesto: la herramienta más poderosa:</strong> La regla 50/30/20: 50% para necesidades, 30% para deseos, 20% para ahorro e inversión. Ajustá los porcentajes según tu realidad, pero mantené la disciplina. Para invertir ese 20%, <a href="https://etoro.tw/REPLACE_AFFILIATE_ID" class="affiliate-link" target="_blank" rel="nofollow sponsored">eToro <span class="affiliate-badge">Afiliado</span></a> te permite comprar acciones fraccionadas y ETFs desde montos muy accesibles.',
                     '<strong>2. Fondo de emergencia:</strong> Antes de invertir, ahorrá 3 a 6 meses de gastos en una cuenta separada. Es tu colchón para imprevistos: no lo toques salvo emergencia real.',
                     '<strong>3. Deuda buena vs. deuda mala:</strong> Deuda buena: la que genera valor (crédito hipotecario, préstamo educativo). Deuda mala: la que consume tu ingreso (tarjetas al límite, préstamos personales para consumo).',
                     '<strong>4. El poder del interés compuesto:</strong> Invertí $100 al mes desde los 25 años -> a los 65 tendrías ~$632,000 (asumiendo 10% anual). Usá nuestra calculadora de interés compuesto.',
@@ -1469,14 +1550,23 @@
                 for (var k = 0; k < a.content.length; k++) {
                     html += '<p>' + a.content[k] + '</p>';
                 }
-                html += '<p><em>Publicado el ' + a.date + ' · ' + a.readTime + ' de lectura</em></p>' +
+                html += '<div class="article-actions">' +
+                    '<div class="rating-group">' +
+                    '<span class="rating-label">¿Te sirvió?</span>' +
+                    '<button class="rating-btn" onclick="voteArticle(' + a.id + ',\'like\')" id="like-' + a.id + '">👍 <span class="count" id="like-count-' + a.id + '">0</span></button>' +
+                    '<button class="rating-btn" onclick="voteArticle(' + a.id + ',\'dislike\')" id="dislike-' + a.id + '">👎 <span class="count" id="dislike-count-' + a.id + '">0</span></button>' +
+                    '</div>' +
+                    '</div>' +
+                    '<p><em>Publicado el ' + a.date + ' · ' + a.readTime + ' de lectura</em></p>' +
                     '<div class="share-buttons">' +
                     '<span style="font-size:0.85rem;color:#666;">Compartir:</span>' +
                     '<a href="#" class="share-btn facebook" onclick="event.preventDefault(); shareArticle(\'facebook\',' + a.id + ')">Facebook</a>' +
                     '<a href="#" class="share-btn twitter" onclick="event.preventDefault(); shareArticle(\'twitter\',' + a.id + ')">Twitter</a>' +
                     '<a href="#" class="share-btn whatsapp" onclick="event.preventDefault(); shareArticle(\'whatsapp\',' + a.id + ')">WhatsApp</a>' +
                     '<a href="#" class="share-btn linkedin" onclick="event.preventDefault(); shareArticle(\'linkedin\',' + a.id + ')">LinkedIn</a>' +
-                    '</div>';
+                    '<button class="copy-btn" onclick="copyArticleLink(' + a.id + ')" id="copy-btn-' + a.id + '">🔗 Copiar enlace</button>' +
+                    '</div>' +
+                    '<div class="affiliate-disclosure">Algunos enlaces pueden ser de afiliados. Si comprás a través de ellos, nos ayudás a mantener el blog sin costo extra para vos. <a href="#sobre-nosotros">Más info</a>.</div>';
                 // Related articles
                 if (related.length > 0) {
                     html += '<div class="related-posts"><h4>📌 Artículos relacionados</h4><div class="related-grid">';
@@ -1522,6 +1612,7 @@
             if (el) {
                 el.classList.add('active');
                 el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                loadRatingUI(id);
             }
         }
 
@@ -1559,6 +1650,89 @@
                     break;
             }
             if (shareUrl) window.open(shareUrl, '_blank', 'width=600,height=400');
+        }
+
+        // ============ VOTING ============
+        function getRatingData(id) {
+            var key = 'rating-' + id;
+            var raw = localStorage.getItem(key);
+            if (raw) return JSON.parse(raw);
+            return { likes: 0, dislikes: 0, voted: null };
+        }
+
+        function saveRatingData(id, data) {
+            localStorage.setItem('rating-' + id, JSON.stringify(data));
+        }
+
+        function loadRatingUI(id) {
+            var data = getRatingData(id);
+            var lc = document.getElementById('like-count-' + id);
+            var dc = document.getElementById('dislike-count-' + id);
+            var lb = document.getElementById('like-' + id);
+            var db = document.getElementById('dislike-' + id);
+            if (lc) lc.textContent = data.likes;
+            if (dc) dc.textContent = data.dislikes;
+            if (lb) lb.classList.toggle('active', data.voted === 'like');
+            if (db) db.classList.toggle('active', data.voted === 'dislike');
+        }
+
+        function voteArticle(id, type) {
+            var data = getRatingData(id);
+            var btn = document.getElementById(type + '-' + id);
+            var countEl = document.getElementById(type + '-count-' + id);
+            var opposite = type === 'like' ? 'dislike' : 'like';
+            var oppositeBtn = document.getElementById(opposite + '-' + id);
+            var oppositeCount = document.getElementById(opposite + '-count-' + id);
+
+            if (data.voted === type) {
+                data[type + 's']--;
+                data.voted = null;
+                if (btn) btn.classList.remove('active');
+            } else {
+                if (data.voted === opposite) {
+                    data[opposite + 's']--;
+                    if (oppositeBtn) oppositeBtn.classList.remove('active');
+                }
+                data[type + 's']++;
+                data.voted = type;
+                if (btn) btn.classList.add('active');
+            }
+
+            if (countEl) countEl.textContent = data[type + 's'];
+            if (oppositeCount) oppositeCount.textContent = data[opposite + 's'];
+            saveRatingData(id, data);
+        }
+
+        // ============ COPY LINK ============
+        function copyArticleLink(id) {
+            var url = window.location.href.split('#')[0] + '#article-' + id;
+            var btn = document.getElementById('copy-btn-' + id);
+            function done() {
+                if (!btn) return;
+                btn.textContent = '✅ Copiado';
+                btn.classList.add('copied');
+                setTimeout(function() {
+                    btn.textContent = '🔗 Copiar enlace';
+                    btn.classList.remove('copied');
+                }, 2000);
+            }
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(url).then(done).catch(function() { fallbackCopy(url, done); });
+            } else {
+                fallbackCopy(url, done);
+            }
+        }
+
+        function fallbackCopy(url, done) {
+            var ta = document.createElement('textarea');
+            ta.value = url;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch(e) {}
+            document.body.removeChild(ta);
+            if (done) done();
         }
 
         function shareSite(platform) {
