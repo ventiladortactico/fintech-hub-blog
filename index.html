@@ -184,9 +184,13 @@
         /* Ads Placeholder */
         .ad-container {
             text-align: center;
-            margin: 1rem 0;
+            margin: 0.8rem 0;
             min-height: 0;
+            overflow: hidden;
+            max-width: 100%;
         }
+        .ad-container > div { max-width: 100%; margin: 0 auto; }
+        .ad-container img { max-width: 100%; height: auto; }
 
         /* Featured Section */
         .featured {
@@ -716,7 +720,8 @@
             .calculator-input { font-size: 0.85rem; }
             .share-btn { font-size: 0.72rem; padding: 0.3rem 0.5rem; }
             .rating-btn { font-size: 0.75rem; padding: 0.25rem 0.6rem; }
-            .ad-container { margin: 0.6rem 0; }
+            .ad-container { margin: 0.5rem 0; }
+            .ad-container > div, [id^="ntv_"] { max-width: 100% !important; overflow: hidden !important; }
             .article-actions { padding: 0.6rem 0; }
             .related-posts { padding: 0.8rem 0; }
             .related-item { padding: 0.6rem; font-size: 0.82rem; }
@@ -748,6 +753,8 @@
             .related-item { font-size: 0.78rem; }
             .related-item strong { font-size: 0.82rem; }
             .tag { font-size: 0.68rem; padding: 0.1rem 0.4rem; }
+            .ad-container { margin: 0.4rem 0; }
+            [id^="ntv_"] img { max-width: 100% !important; height: auto !important; }
         }
 
         @media (max-width: 360px) {
@@ -1005,7 +1012,8 @@
         .rating-label { font-size: 0.85rem; color: var(--text-muted); margin-right: 0.3rem; }
 
         /* ============ AFFILIATE ============ */
-        .article-ad-placeholder { min-height: 0; }
+        .article-ad-placeholder { min-height: 0; max-width: 100%; overflow: hidden; }
+        .article-ad-placeholder > * { max-width: 100%; }
 
         .affiliate-disclosure {
             font-size: 0.75rem;
@@ -1048,6 +1056,11 @@
         }
         .copy-btn:hover { border-color: var(--accent); color: var(--accent); }
         .copy-btn.copied { border-color: #22c55e; color: #22c55e; }
+
+        /* ============ CONTAIN BIDVERTISER ADS ============ */
+        [id^="ntv_"] { max-width: 100%; overflow: hidden; }
+        [id^="ntv_"] img { max-width: 100%; height: auto; }
+        [id^="ntv_"] table, [id^="ntv_"] div { max-width: 100%; }
 
         /* ============ DARK MODE OVERRIDES ============ */
         [data-theme="dark"] .rating-btn.active { background: var(--accent); border-color: var(--accent); }
