@@ -1181,10 +1181,10 @@
             <aside>
                 <div class="sidebar reveal">
                     <h3>🔥 Trending</h3>
-                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(1)">Cómo hacer un presupuesto desde cero</a></div>
-                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(3)">Bitcoin vs Ethereum: Comparativa 2026</a></div>
-                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(5)">IA y Machine Learning en Finanzas</a></div>
-                    <div class="sidebar-item"><a href="#" onclick="event.preventDefault(); showArticle(6)">Seguridad en Finanzas Digitales</a></div>
+                    <div class="sidebar-item"><a href="/articulos/como-hacer-presupuesto-mensual.html">Cómo hacer un presupuesto desde cero</a></div>
+                    <div class="sidebar-item"><a href="/articulos/bitcoin-vs-ethereum.html">Bitcoin vs Ethereum: Comparativa 2026</a></div>
+                    <div class="sidebar-item"><a href="/articulos/ia-machine-learning-finanzas.html">IA y Machine Learning en Finanzas</a></div>
+                    <div class="sidebar-item"><a href="/articulos/guia-comprar-bitcoin.html">Seguridad en Finanzas Digitales</a></div>
                 </div>
 
                 <div class="sidebar reveal">
@@ -1438,6 +1438,18 @@
 
     <script>
         // ============ DATA ============
+        var articleUrls = {
+            1: '/articulos/como-hacer-presupuesto-mensual.html',
+            2: '/articulos/aplicaciones-fintech.html',
+            3: '/articulos/bitcoin-vs-ethereum.html',
+            4: '/articulos/eliminar-deudas-tarjeta-credito.html',
+            5: '/articulos/ia-machine-learning-finanzas.html',
+            6: '/articulos/guia-comprar-bitcoin.html',
+            7: '/articulos/emprendimiento-financiero.html',
+            8: '/articulos/psicologia-dinero.html',
+            9: '/articulos/educacion-financiera-desde-cero.html'
+        };
+
         var articles = [
             {
                 id: 1,
@@ -1643,7 +1655,8 @@
             var html = '';
             for (var i = 0; i < filtered.length; i++) {
                 var a = filtered[i];
-                html += '<article class="post-card reveal" onclick="showArticle(' + a.id + ')">' +
+                var url = articleUrls[a.id] || '#';
+                html += '<a href="' + url + '" class="post-card reveal">' +
                     '<div class="post-image">' + a.emoji + '</div>' +
                     '<div class="post-content">' +
                     '<span class="post-category">' + a.categoryLabel + '</span>' +
@@ -1652,7 +1665,7 @@
                     '<div class="post-meta">' +
                     '<span>' + a.date + '</span>' +
                     '<span>' + a.readTime + '</span>' +
-                    '</div></div></article>';
+                    '</div></div></a>';
             }
             grid.innerHTML = html;
             hideAllArticles();
@@ -1983,7 +1996,8 @@
             var html = '';
             for (var j = 0; j < results.length; j++) {
                 var r = results[j];
-                html += '<article class="post-card" onclick="showArticle(' + r.id + ')">' +
+                var url = articleUrls[r.id] || '#';
+                html += '<a href="' + url + '" class="post-card">' +
                     '<div class="post-image">' + r.emoji + '</div>' +
                     '<div class="post-content">' +
                     '<span class="post-category">' + r.categoryLabel + '</span>' +
@@ -1992,7 +2006,7 @@
                     '<div class="post-meta">' +
                     '<span>' + r.date + '</span>' +
                     '<span>' + r.readTime + '</span>' +
-                    '</div></div></article>';
+                    '</div></div></a>';
             }
             if (results.length === 0) {
                 html = '<div class="no-posts">🔍 No encontramos artículos para "' + query + '". Probá con otras palabras.</div>';
