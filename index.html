@@ -18,6 +18,7 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Plata Hoy - Tu Guía de Finanzas y Tecnología">
     <meta name="twitter:description" content="Blog sobre finanzas personales, inversiones, criptomonedas y tecnología.">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://va.vercel-scripts.com">
     <link rel="preconnect" href="https://srv.bidvertiser.com">
     <link rel="preconnect" href="https://cdn.hyperpromote.com">
@@ -26,6 +27,114 @@
 
     <!-- BidVertiser - Código general (reemplazar PUBLISHER_ID tras registrarse) -->
     <script data-cfasync="false" type="text/javascript" defer src="//srv.bidvertiser.com/bidvertiser/bdv_ref.dbm?Ref_Option=2105541"></script>
+
+    <!-- JSON-LD Schemas for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Plata Hoy",
+      "url": "https://platahoy.vercel.app/",
+      "description": "Blog sobre finanzas personales, inversiones, criptomonedas y tecnología. Aprende a gestionar tu dinero y a invertir inteligentemente.",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://platahoy.vercel.app/?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "Plata Hoy",
+      "url": "https://platahoy.vercel.app/",
+      "description": "Tu fuente de información sobre finanzas, inversiones y tecnología",
+      "logo": "https://plata-hoy.vercel.app/logo.png",
+      "sameAs": [
+        "https://twitter.com/platahoy",
+        "https://linkedin.com/company/platahoy"
+      ],
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "",
+        "contactType": "customer service",
+        "email": "contacto@plata-hoy.vercel.app"
+      }
+    }
+    </script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Cuánto debería ahorrar de mi sueldo cada mes?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La regla 50/30/20 es el estándar recomendado: 50% para necesidades, 30% para deseos y 20% para ahorro e inversión. Si no podés llegar al 20%, empezá con un 5% o 10% y aumentá progresivamente."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es mejor ahorrar o invertir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Depende del plazo. Ahorrar para metas a corto plazo (<2 años) y fondo de emergencia. Invertir para metas a mediano/largo plazo (+3 años). El S&P 500 ha rendido ~10% anual histórico. Estrategia: fondo de emergencia primero, luego invertí el resto."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto dinero necesito para empezar a invertir?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Mucho menos de lo que creés. Desde $1 USD en acciones fraccionadas con Fidelity o Vanguard, $10 USD en cripto en Binance, y $50 USD en ETFs tradicionales. Lo importante es la consistencia, no el monto inicial."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es seguro invertir en criptomonedas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Las criptomonedas son inversiones de alto riesgo con alta volatilidad. Solo invertí lo que estés dispuesto a perder. Emprendé con montos pequeños y diversificá tu portafolio. Bitcoin y Ethereum tienen más estabilidad que altcoins, pero siguen siendo volátiles."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tarjeta de crédito es mejor para empezar?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Para empezar, buscá tarjetas sin anualidad con beneficios básicos. Una vez que tengás buen historial de crédito, podés acceder a tarjetas premium con mejores recompensas. Lo más importante es pagar el saldo completo cada mes para evitar intereses."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo protejo mi dinero de la inflación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "La mejor protección contra la inflación es invertir en activos que históricamente superan la inflación: acciones, ETFs del S&P 500, bienes raíces y algunas criptomonedas. Mantener dinero en efectivo o cuentas de bajo rendimiento hace que pierdas poder adquisitivo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es un ETF y cómo funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Un ETF (Exchange Traded Fund) es un fondo que rastrea un índice como el S&P 500. Ofrece diversificación instantánea con comisiones bajas. Es ideal para principiantes porque no necesitás elegir acciones individuales. Un ETF del S&P 500 te da exposición a las 500 empresas más grandes de EEUU."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cómo preparo mi jubilación?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Empezá lo antes posible. El interés compuesto es tu mejor aliado: invertir $100/mes desde los 25 años te da más a los 65 que invertir $500/mes desde los 45. Usá cuentas de jubilación con beneficios fiscales y diversificá entre acciones, bonos y bienes raíces."
+          }
+        }
+      ]
+    }
+    </script>
 
     <style>
         :root {
@@ -1263,7 +1372,12 @@
             <h2>📖 Sobre Plata Hoy</h2>
             <p>Plata Hoy nació con la misión de democratizar la educación financiera. Creemos que todos merecen acceso a información clara, práctica y sin jargon innecesario sobre finanzas personales, inversiones, criptomonedas y tecnología financiera.</p>
             <p>Según la <strong>Encuesta Nacional de Inclusión Financiera (ENIF)</strong>, cerca de 8 de cada 10 personas en México ya cuentan con al menos un producto financiero formal. Sin embargo, <strong>2 de cada 3 colombianos no ahorran</strong>. Mientras tanto, el mercado FinTech global crece al 18.2% anual y alcanzó los $460.76 mil millones en 2026. Nuestro objetivo es cerrar esa brecha con contenido educativo de calidad.</p>
-            <p>Publicamos contenido nuevo cada semana. Seguinos en redes sociales para estar al día.</p>
+            <p>Publicamos contenido nuevo cada semana. Seguinos en redes sociales para estar al día:</p>
+            <div style="display: flex; gap: 0.8rem; margin-top: 1rem; flex-wrap: wrap;">
+                <a href="https://twitter.com/platahoy" target="_blank" rel="noopener" style="background: #1a91da; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; transition: opacity 0.3s;">Twitter/X</a>
+                <a href="https://linkedin.com/company/platahoy" target="_blank" rel="noopener" style="background: #0a66c2; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; transition: opacity 0.3s;">LinkedIn</a>
+                <a href="https://instagram.com/platahoy" target="_blank" rel="noopener" style="background: #e4405f; color: white; padding: 0.5rem 1rem; border-radius: 20px; text-decoration: none; font-size: 0.85rem; transition: opacity 0.3s;">Instagram</a>
+            </div>
         </section>
 
         <!-- Calculator Section -->
@@ -1274,13 +1388,24 @@
                 <div class="calculator-card">
                     <h3>📊 Parámetros</h3>
                     <label for="calc-initial">Monto inicial ($)</label>
-                    <input class="calculator-input" id="calc-initial" type="number" value="1000" min="0" oninput="calcInterest()">
+                    <input class="calculator-input" id="calc-initial" type="number" value="1000" min="0" oninput="validateAndCalc()">
                     <label for="calc-monthly">Aporte mensual ($)</label>
-                    <input class="calculator-input" id="calc-monthly" type="number" value="200" min="0" oninput="calcInterest()">
+                    <input class="calculator-input" id="calc-monthly" type="number" value="100" min="0" oninput="validateAndCalc()">
                     <label for="calc-rate">Tasa de interés anual (%)</label>
-                    <input class="calculator-input" id="calc-rate" type="number" value="10" min="0" step="0.1" oninput="calcInterest()">
+                    <input class="calculator-input" id="calc-rate" type="number" value="8" min="0" step="0.1" oninput="validateAndCalc()">
                     <label for="calc-years">Años de inversión</label>
-                    <input class="calculator-input" id="calc-years" type="number" value="10" min="1" max="50" oninput="calcInterest()">
+                    <input class="calculator-input" id="calc-years" type="number" value="20" min="1" max="50" oninput="validateAndCalc()">
+                    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+                        <label style="font-size:0.8rem;margin-bottom:0.5rem;display:block;">Escenarios preconfigurados:</label>
+                        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;">
+                            <button onclick="setScenario('conservative')" style="background:#667eea;color:white;border:none;padding:0.4rem 0.8rem;border-radius:5px;cursor:pointer;font-size:0.75rem;transition:opacity 0.3s;">Conservador 5%</button>
+                            <button onclick="setScenario('moderate')" style="background:#764ba2;color:white;border:none;padding:0.4rem 0.8rem;border-radius:5px;cursor:pointer;font-size:0.75rem;transition:opacity 0.3s;">Moderado 8%</button>
+                            <button onclick="setScenario('aggressive')" style="background:#e74c3c;color:white;border:none;padding:0.4rem 0.8rem;border-radius:5px;cursor:pointer;font-size:0.75rem;transition:opacity 0.3s;">Agresivo 12%</button>
+                        </div>
+                    </div>
+                    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+                        <button class="btn" onclick="shareResult()" style="font-size:0.85rem;padding:0.5rem 1rem;">📤 Compartir resultado</button>
+                    </div>
                 </div>
                 <div class="calculator-card">
                     <h3>📈 Resultado</h3>
@@ -1289,6 +1414,9 @@
                         <strong>Total aportado:</strong> $0<br>
                         <strong>Ganancia por interés:</strong> $0<br>
                         <strong>Rendimiento promedio:</strong> 0%
+                    </div>
+                    <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
+                        <canvas id="growthChart" style="max-height: 200px;"></canvas>
                     </div>
                     <div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--border);">
                         <label style="font-size:0.8rem;">Ajustá los valores y el resultado se actualiza en tiempo real 🚀</label>
@@ -2026,6 +2154,24 @@
         }
 
         // ============ CALCULATOR ============
+        function validateAndCalc() {
+            var initialInput = document.getElementById('calc-initial');
+            var monthlyInput = document.getElementById('calc-monthly');
+            var rateInput = document.getElementById('calc-rate');
+            var yearsInput = document.getElementById('calc-years');
+
+            // Validar que no sean negativos
+            if (initialInput.value < 0) initialInput.value = 0;
+            if (monthlyInput.value < 0) monthlyInput.value = 0;
+            if (rateInput.value < 0) rateInput.value = 0;
+            if (yearsInput.value < 1) yearsInput.value = 1;
+            if (yearsInput.value > 50) yearsInput.value = 50;
+
+            calcInterest();
+        }
+
+        var growthChart = null;
+
         function calcInterest() {
             var initial = parseFloat(document.getElementById('calc-initial').value) || 0;
             var monthly = parseFloat(document.getElementById('calc-monthly').value) || 0;
@@ -2035,10 +2181,24 @@
             var months = years * 12;
             var total = initial;
             var totalContrib = initial;
+
+            // Datos para el gráfico
+            var labels = [];
+            var dataTotal = [];
+            var dataContrib = [];
+
             for (var i = 0; i < months; i++) {
                 total = total * (1 + monthlyRate) + monthly;
                 totalContrib += monthly;
+
+                // Agregar datos cada 12 meses (anual)
+                if (i % 12 === 0 || i === months - 1) {
+                    labels.push('Año ' + Math.floor(i / 12));
+                    dataTotal.push(total);
+                    dataContrib.push(totalContrib);
+                }
             }
+
             var earnings = total - totalContrib;
             var totalContribDisplay = '$' + totalContrib.toLocaleString('en-US', {maximumFractionDigits: 0});
             var totalDisplay = '$' + total.toLocaleString('en-US', {maximumFractionDigits: 0});
@@ -2049,6 +2209,122 @@
                 '<strong>Total aportado:</strong> ' + totalContribDisplay + '<br>' +
                 '<strong>Ganancia por interés:</strong> ' + earningsDisplay + '<br>' +
                 '<strong>Rendimiento promedio:</strong> ' + pct + '%';
+
+            // Actualizar gráfico
+            updateChart(labels, dataTotal, dataContrib);
+        }
+
+        function updateChart(labels, dataTotal, dataContrib) {
+            var ctx = document.getElementById('growthChart').getContext('2d');
+
+            if (growthChart) {
+                growthChart.destroy();
+            }
+
+            growthChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'Total con interés',
+                        data: dataTotal,
+                        borderColor: '#667eea',
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }, {
+                        label: 'Total aportado',
+                        data: dataContrib,
+                        borderColor: '#764ba2',
+                        backgroundColor: 'rgba(118, 75, 162, 0.1)',
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: true,
+                            position: 'bottom',
+                            labels: {
+                                font: { size: 11 },
+                                boxWidth: 12
+                            }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    return '$' + value.toLocaleString('en-US', {maximumFractionDigits: 0});
+                                },
+                                font: { size: 10 }
+                            }
+                        },
+                        x: {
+                            ticks: {
+                                font: { size: 10 }
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function setScenario(scenario) {
+            var initialInput = document.getElementById('calc-initial');
+            var monthlyInput = document.getElementById('calc-monthly');
+            var rateInput = document.getElementById('calc-rate');
+            var yearsInput = document.getElementById('calc-years');
+
+            switch(scenario) {
+                case 'conservative':
+                    initialInput.value = 1000;
+                    monthlyInput.value = 100;
+                    rateInput.value = 5;
+                    yearsInput.value = 20;
+                    break;
+                case 'moderate':
+                    initialInput.value = 1000;
+                    monthlyInput.value = 100;
+                    rateInput.value = 8;
+                    yearsInput.value = 20;
+                    break;
+                case 'aggressive':
+                    initialInput.value = 1000;
+                    monthlyInput.value = 100;
+                    rateInput.value = 12;
+                    yearsInput.value = 20;
+                    break;
+            }
+
+            validateAndCalc();
+        }
+
+        function shareResult() {
+            var initial = document.getElementById('calc-initial').value;
+            var monthly = document.getElementById('calc-monthly').value;
+            var rate = document.getElementById('calc-rate').value;
+            var years = document.getElementById('calc-years').value;
+            var total = document.getElementById('calc-result').textContent.replace('total final', '').trim();
+
+            var text = '📊 Mi proyección de inversión: Inicial $' + initial + ' + Aporte mensual $' + monthly + ' a ' + rate + '% anual por ' + years + ' años = ' + total + ' total final. ¡Calculá la tuya en Plata Hoy!';
+            var url = 'https://platahoy.vercel.app/';
+
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Mi proyección de inversión - Plata Hoy',
+                    text: text,
+                    url: url
+                }).catch(console.error);
+            } else {
+                // Fallback para desktop
+                var twitterUrl = 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url);
+                window.open(twitterUrl, '_blank');
+            }
         }
 
         // ============ THEME TOGGLE ============
