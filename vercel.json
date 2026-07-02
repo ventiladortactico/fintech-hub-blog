@@ -6,11 +6,59 @@
       "dest": "/index.html"
     },
     {
+      "src": "/about",
+      "dest": "/about.html"
+    },
+    {
       "src": "/sitemap.xml",
       "headers": {
         "Content-Type": "application/xml; charset=utf-8"
       },
       "dest": "/sitemap.xml"
+    },
+    {
+      "src": "/articulos/como-hacer-presupuesto-mensual",
+      "dest": "/articulos/como-hacer-presupuesto-mensual.html"
+    },
+    {
+      "src": "/articulos/aplicaciones-fintech",
+      "dest": "/articulos/aplicaciones-fintech.html"
+    },
+    {
+      "src": "/articulos/bitcoin-vs-ethereum",
+      "dest": "/articulos/bitcoin-vs-ethereum.html"
+    },
+    {
+      "src": "/articulos/eliminar-deudas-tarjeta-credito",
+      "dest": "/articulos/eliminar-deudas-tarjeta-credito.html"
+    },
+    {
+      "src": "/articulos/ia-machine-learning-finanzas",
+      "dest": "/articulos/ia-machine-learning-finanzas.html"
+    },
+    {
+      "src": "/articulos/guia-comprar-bitcoin",
+      "dest": "/articulos/guia-comprar-bitcoin.html"
+    },
+    {
+      "src": "/articulos/emprendimiento-financiero",
+      "dest": "/articulos/emprendimiento-financiero.html"
+    },
+    {
+      "src": "/articulos/psicologia-dinero",
+      "dest": "/articulos/psicologia-dinero.html"
+    },
+    {
+      "src": "/articulos/educacion-financiera-desde-cero",
+      "dest": "/articulos/educacion-financiera-desde-cero.html"
+    },
+    {
+      "src": "/articulos/guia-inversion-principiantes-latam",
+      "dest": "/articulos/guia-inversion-principiantes-latam.html"
+    },
+    {
+      "src": "/articulos/mejores-apps-fintech-latam-2026",
+      "dest": "/articulos/mejores-apps-fintech-latam-2026.html"
     }
   ]
 }
