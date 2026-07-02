@@ -1,0 +1,57 @@
+# Plata Hoy - Blog de Finanzas Personales, Inversiones y Tecnología
+
+## Descripción del sitio
+Plata Hoy es un blog educativo en español (es-AR) enfocado en finanzas personales, inversiones, criptomonedas y tecnología financiera para latinoamericanos. El objetivo es democratizar la educación financiera con contenido claro, práctico y sin jerga innecesaria.
+
+## Público objetivo
+- Personas interesadas en aprender sobre finanzas personales
+- Principiantes en inversiones
+- Usuarios de criptomonedas en LATAM
+- Personas que buscan mejorar su educación financiera
+- Usuarios de apps FinTech en Latinoamérica
+
+## Temas principales
+- Presupuesto y gestión de gastos
+- Eliminación de deudas
+- Inversiones (ETFs, acciones, criptomonedas)
+- Apps FinTech y neobancos
+- Educación financiera desde cero
+- Psicología del dinero
+- Emprendimiento financiero
+- Inteligencia artificial en finanzas
+
+## Estilo de contenido
+- Lenguaje rioplatense (es-AR): "invertí", "comprás", "ahorrá"
+- Explicaciones claras y prácticas
+- Datos actualizados con fuentes citadas
+- Comparativas y tablas para facilitar decisiones
+- Ejemplos concretos y calculables
+
+## Artículos principales
+- Guía de inversión para principiantes en LATAM
+- Las mejores apps FinTech para latinoamericanos en 2026
+- Cómo hacer un presupuesto mensual
+- Bitcoin vs Ethereum: comparativa
+- Cómo eliminar deudas de tarjeta de crédito
+- Educación financiera desde cero
+- Psicología del dinero
+- Emprendimiento financiero
+- Aplicaciones FinTech populares
+- IA y machine learning en finanzas
+
+## Herramientas interactivas
+- Calculadora de interés compuesto con gráficos
+- Escenarios preconfigurados (conservador, moderado, agresivo)
+- Comparativas de rendimiento vs inflación
+
+## Datos de contacto
+- Email: contacto@platahoy.vercel.app
+- Twitter/X: @joaquin080203
+- LinkedIn: linkedin.com/in/joaquín-salgueiro-3602943b3
+- Instagram: @jo._.a
+
+## Autor
+Joaquín Salgueiro - Autor y creador de Plata Hoy, enfocado en educación financiera accesible para LATAM.
+
+## Actualización
+Contenido nuevo publicado semanalmente. Última actualización: julio 2026.
