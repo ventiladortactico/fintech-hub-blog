@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="100%" style="stop-color:#764ba2"/>
+    </linearGradient>
+    <style>
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&amp;display=swap');
+      .title { font-family: 'Inter', Arial, sans-serif; font-size: 72px; font-weight: 800; fill: white; }
+      .subtitle { font-family: 'Inter', Arial, sans-serif; font-size: 32px; font-weight: 600; fill: rgba(255,255,255,0.9); }
+      .tagline { font-family: 'Inter', Arial, sans-serif; font-size: 24px; font-weight: 400; fill: rgba(255,255,255,0.8); }
+      .logo-bg { fill: rgba(255,255,255,0.15); }
+      .logo-text { font-family: 'Arial', sans-serif; font-size: 48px; font-weight: bold; fill: white; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="200" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="1100" cy="530" r="150" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="600" cy="315" r="300" fill="rgba(255,255,255,0.03)"/>
+  
+  <!-- Logo -->
+  <g transform="translate(100, 100)">
+    <rect x="0" y="0" width="120" height="120" rx="24" class="logo-bg"/>
+    <text x="60" y="75" text-anchor="middle" class="logo-text">PH</text>
+  </g>
+  
+  <!-- Text content -->
+  <text x="100" y="280" class="title">Plata Hoy</text>
+  <text x="100" y="340" class="subtitle">Finanzas, Inversiones y Tecnología</text>
+  <text x="100" y="400" class="tagline">Tu guía para gestionar tu dinero e invertir inteligentemente</text>
+  
+  <!-- URL -->
+  <text x="100" y="550" class="tagline" style="font-size: 20px; fill: rgba(255,255,255,0.6);">platahoy.vercel.app</text>
+</svg>
