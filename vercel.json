@@ -10,13 +10,6 @@
       "dest": "/about.html"
     },
     {
-      "src": "/sitemap.xml",
-      "headers": {
-        "Content-Type": "application/xml; charset=utf-8"
-      },
-      "dest": "/sitemap.xml"
-    },
-    {
       "src": "/articulos/como-hacer-presupuesto-mensual",
       "dest": "/articulos/como-hacer-presupuesto-mensual.html"
     },
