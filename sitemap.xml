@@ -61,6 +61,18 @@
     <priority>0.8</priority>
   </url>
   <url>
+    <loc>https://platahoy.vercel.app/articulos/guia-inversion-principiantes-latam.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://platahoy.vercel.app/articulos/mejores-apps-fintech-latam-2026.html</loc>
+    <lastmod>2026-07-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
     <loc>https://plata-hoy.vercel.app/about/</loc>
     <lastmod>2026-07-01</lastmod>
     <changefreq>monthly</changefreq>
