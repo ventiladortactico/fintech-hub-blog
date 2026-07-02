@@ -45,7 +45,7 @@ Plata Hoy es un blog educativo en español (es-AR) enfocado en finanzas personal
 - Comparativas de rendimiento vs inflación
 
 ## Datos de contacto
-- Email: contacto@platahoy.vercel.app
+- Email: joaquinsalgueiro15@gmail.com
 - Twitter/X: @joaquin080203
 - LinkedIn: linkedin.com/in/joaquín-salgueiro-3602943b3
 - Instagram: @jo._.a
